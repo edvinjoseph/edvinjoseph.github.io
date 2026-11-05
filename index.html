@@ -308,6 +308,21 @@ html, body { overflow-x: clip; }
   .gal .block { grid-template-rows: none; }
 }
 
+/* Find Your True North: the whole site as three columns drifting past each other */
+.item.p.fy { display: block; padding: 28px calc(50vw - 50%) 0; overflow: hidden; }
+.item.p.fy > p { max-width: 62ch; }
+.fy .mark { display: block; width: auto; max-width: none; height: 34px; margin: 0 0 16px; mix-blend-mode: screen; }
+.fy .wall { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: min(100vw - 2 * var(--edge), 1160px); height: min(76vh, 660px); margin: 20px 0 0 50%; transform: translateX(-50%); -webkit-mask-image: linear-gradient(transparent, #000 44px); mask-image: linear-gradient(transparent, #000 44px); }
+.fy .lane { overflow: hidden; border-radius: 12px 12px 0 0; min-width: 0; }
+.fy .belt { display: flex; flex-direction: column; animation: fy-up var(--t) linear infinite; will-change: transform; }
+.fy .belt.down { animation-name: fy-down; }
+.fy .belt img { display: block; width: 100%; height: auto; flex: none; margin-bottom: var(--gap, 16px); border-radius: 12px; }
+.fy .wall:hover .belt { animation-play-state: paused; }
+@keyframes fy-up { to { transform: translateY(-25%); } }
+@keyframes fy-down { from { transform: translateY(-25%); } to { transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .fy .belt { animation: none; } }
+@media (max-width: 860px) { .fy .wall { gap: 8px; height: 110vw; } .fy .belt { --gap: 8px; } }
+
 /* breakouts (AR video, 3D Mac): the picture runs over the sections above and below,
    the text sits centred beside it. The picture, not the section, is lifted, so it clears every section's background */
 .list li.p.side.over { grid-template-rows: 1fr auto auto 1fr; }
@@ -461,12 +476,6 @@ html, body { overflow-x: clip; }
     <div class="strip"><a class="phone pixel" href="w/twinbow-1.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#655a5e;--w:241px"><span class="shot"><img src="w/opt/twinbow-1-241.webp" srcset="w/opt/twinbow-1-241.webp 1x, w/opt/twinbow-1-463.webp 2x" width="241" height="520" style="width:241px" alt="Twinbow screen 1"></span></span></a><a class="phone pixel" href="w/twinbow-2.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#c6c6c6;--w:232px"><span class="shot"><img src="w/opt/twinbow-2-232.webp" srcset="w/opt/twinbow-2-232.webp 1x, w/opt/twinbow-2-393.webp 2x" width="232" height="520" style="width:232px" alt="Twinbow screen 2"></span></span></a><a class="phone pixel" href="w/twinbow-3.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#b0b0b0;--w:231px"><span class="shot"><img src="w/opt/twinbow-3-231.webp" srcset="w/opt/twinbow-3-231.webp 1x, w/opt/twinbow-3-393.webp 2x" width="231" height="520" style="width:231px" alt="Twinbow screen 3"></span></span></a><a class="phone pixel" href="w/twinbow-4.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#b2b1b9;--w:232px"><span class="shot"><img src="w/opt/twinbow-4-232.webp" srcset="w/opt/twinbow-4-232.webp 1x, w/opt/twinbow-4-392.webp 2x" width="232" height="520" style="width:232px" alt="Twinbow screen 4"></span></span></a><a class="phone pixel" href="w/twinbow-5.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#aeaeae;--w:230px"><span class="shot"><img src="w/opt/twinbow-5-230.webp" srcset="w/opt/twinbow-5-230.webp 1x, w/opt/twinbow-5-386.webp 2x" width="230" height="520" style="width:230px" alt="Twinbow screen 5"></span></span></a><a class="phone pixel" href="w/twinbow-6.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#89898b;--w:234px"><span class="shot"><img src="w/opt/twinbow-6-234.webp" srcset="w/opt/twinbow-6-234.webp 1x, w/opt/twinbow-6-450.webp 2x" width="234" height="520" style="width:234px" alt="Twinbow screen 6"></span></span></a></div>
   </div>
 
-  <div class="item p c3">
-    <h3>Find Your True North</h3>
-    <p>My first internship, at a career guidance startup. I designed the logo and the website, with a home page, a career quiz and a blog.</p>
-    <div class="strip"><a href="w/fytn-2.jpg" target="_blank" rel="noopener"><img src="w/opt/fytn-2-135.webp" srcset="w/opt/fytn-2-135.webp 1x, w/opt/fytn-2-270.webp 2x" width="135" height="180" style="width:135px" alt="Find Your True North 1"></a><a href="w/fytn-3.jpg" target="_blank" rel="noopener"><img src="w/opt/fytn-3-135.webp" srcset="w/opt/fytn-3-135.webp 1x, w/opt/fytn-3-270.webp 2x" width="135" height="180" style="width:135px" alt="Find Your True North 2"></a><a href="w/fytn-5.jpg" target="_blank" rel="noopener"><img src="w/opt/fytn-5-135.webp" srcset="w/opt/fytn-5-135.webp 1x, w/opt/fytn-5-270.webp 2x" width="135" height="180" style="width:135px" alt="Find Your True North 3"></a><a href="w/fytn-1.png" target="_blank" rel="noopener"><img src="w/opt/fytn-1-594.webp" srcset="w/opt/fytn-1-594.webp 1x, w/opt/fytn-1-1188.webp 2x" width="594" height="180" style="width:594px" alt="Find Your True North 4"></a></div>
-  </div>
-
   <div class="item p c2 lap">
     <h3>myUPES</h3>
     <p>A redesign of the student portal at UPES, my university. It puts what students check every day on one dashboard.</p>
@@ -480,6 +489,17 @@ html, body { overflow-x: clip; }
         </div>
       </div>
       <img class="mac" src="w/opt/myupes-mac-1160.webp" srcset="w/opt/myupes-mac-580.webp 580w, w/opt/myupes-mac-1160.webp 1160w, w/opt/myupes-mac-2110.webp 2110w" sizes="(max-width: 860px) 92vw, 1160px" width="2110" height="1248" alt="">
+    </div>
+  </div>
+
+  <div class="item p c3 fy">
+    <img class="mark" src="w/opt/fytn-logo-298.webp" srcset="w/opt/fytn-logo-298.webp 1x" width="298" height="80" alt="Find Your True North logo">
+    <h3>Find Your True North</h3>
+    <p>My first internship, at a career guidance startup. I designed the logo and the website, with a home page, a career quiz and a blog.</p>
+    <div class="wall">
+      <div class="lane"><div class="belt up" style="--t:120s"><img src="w/opt/fytn-home-380.webp" srcset="w/opt/fytn-home-190.webp 190w, w/opt/fytn-home-380.webp 380w, w/opt/fytn-home-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1512" height="7440" alt="The Find Your True North home page"><img src="w/opt/fytn-home-380.webp" srcset="w/opt/fytn-home-190.webp 190w, w/opt/fytn-home-380.webp 380w, w/opt/fytn-home-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1512" height="7440" alt=""><img src="w/opt/fytn-home-380.webp" srcset="w/opt/fytn-home-190.webp 190w, w/opt/fytn-home-380.webp 380w, w/opt/fytn-home-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1512" height="7440" alt=""><img src="w/opt/fytn-home-380.webp" srcset="w/opt/fytn-home-190.webp 190w, w/opt/fytn-home-380.webp 380w, w/opt/fytn-home-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1512" height="7440" alt=""></div></div>
+      <div class="lane"><div class="belt down" style="--t:76s"><img src="w/opt/fytn-quiz-380.webp" srcset="w/opt/fytn-quiz-190.webp 190w, w/opt/fytn-quiz-380.webp 380w, w/opt/fytn-quiz-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1691" height="3756" alt="The career quiz page"><img src="w/opt/fytn-quiz-380.webp" srcset="w/opt/fytn-quiz-190.webp 190w, w/opt/fytn-quiz-380.webp 380w, w/opt/fytn-quiz-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1691" height="3756" alt=""><img src="w/opt/fytn-quiz-380.webp" srcset="w/opt/fytn-quiz-190.webp 190w, w/opt/fytn-quiz-380.webp 380w, w/opt/fytn-quiz-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1691" height="3756" alt=""><img src="w/opt/fytn-quiz-380.webp" srcset="w/opt/fytn-quiz-190.webp 190w, w/opt/fytn-quiz-380.webp 380w, w/opt/fytn-quiz-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1691" height="3756" alt=""></div></div>
+      <div class="lane"><div class="belt up" style="--t:92s"><img src="w/opt/fytn-blog-380.webp" srcset="w/opt/fytn-blog-190.webp 190w, w/opt/fytn-blog-380.webp 380w, w/opt/fytn-blog-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1512" height="3560" alt="The blog page"><img src="w/opt/fytn-blog-380.webp" srcset="w/opt/fytn-blog-190.webp 190w, w/opt/fytn-blog-380.webp 380w, w/opt/fytn-blog-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1512" height="3560" alt=""><img src="w/opt/fytn-blog-380.webp" srcset="w/opt/fytn-blog-190.webp 190w, w/opt/fytn-blog-380.webp 380w, w/opt/fytn-blog-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1512" height="3560" alt=""><img src="w/opt/fytn-blog-380.webp" srcset="w/opt/fytn-blog-190.webp 190w, w/opt/fytn-blog-380.webp 380w, w/opt/fytn-blog-760.webp 760w" sizes="(max-width: 860px) 31vw, 380px" width="1512" height="3560" alt=""></div></div>
     </div>
   </div>
 

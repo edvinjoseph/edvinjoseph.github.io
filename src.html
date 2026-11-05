@@ -308,6 +308,21 @@ html, body { overflow-x: clip; }
   .gal .block { grid-template-rows: none; }
 }
 
+/* Find Your True North: the whole site as three columns drifting past each other */
+.item.p.fy { display: block; padding: 28px calc(50vw - 50%) 0; overflow: hidden; }
+.item.p.fy > p { max-width: 62ch; }
+.fy .mark { display: block; width: auto; max-width: none; height: 34px; margin: 0 0 16px; mix-blend-mode: screen; }
+.fy .wall { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: min(100vw - 2 * var(--edge), 1160px); height: min(76vh, 660px); margin: 20px 0 0 50%; transform: translateX(-50%); -webkit-mask-image: linear-gradient(transparent, #000 44px); mask-image: linear-gradient(transparent, #000 44px); }
+.fy .lane { overflow: hidden; border-radius: 12px 12px 0 0; min-width: 0; }
+.fy .belt { display: flex; flex-direction: column; animation: fy-up var(--t) linear infinite; will-change: transform; }
+.fy .belt.down { animation-name: fy-down; }
+.fy .belt img { display: block; width: 100%; height: auto; flex: none; margin-bottom: var(--gap, 16px); border-radius: 12px; }
+.fy .wall:hover .belt { animation-play-state: paused; }
+@keyframes fy-up { to { transform: translateY(-25%); } }
+@keyframes fy-down { from { transform: translateY(-25%); } to { transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .fy .belt { animation: none; } }
+@media (max-width: 860px) { .fy .wall { gap: 8px; height: 110vw; } .fy .belt { --gap: 8px; } }
+
 /* breakouts (AR video, 3D Mac): the picture runs over the sections above and below,
    the text sits centred beside it. The picture, not the section, is lifted, so it clears every section's background */
 .list li.p.side.over { grid-template-rows: 1fr auto auto 1fr; }
@@ -461,12 +476,6 @@ html, body { overflow-x: clip; }
     <div class="strip" data-imgs="twinbow-1.jpg twinbow-2.jpg twinbow-3.jpg twinbow-4.jpg twinbow-5.jpg twinbow-6.jpg" data-frame="pixel" data-alt="Twinbow screen"></div>
   </div>
 
-  <div class="item p c3">
-    <h3>Find Your True North</h3>
-    <p>My first internship, at a career guidance startup. I designed the logo and the website, with a home page, a career quiz and a blog.</p>
-    <div class="strip" data-imgs="fytn-2.jpg fytn-3.jpg fytn-5.jpg fytn-1.png" data-alt="Find Your True North"></div>
-  </div>
-
   <div class="item p c2 lap">
     <h3>myUPES</h3>
     <p>A redesign of the student portal at UPES, my university. It puts what students check every day on one dashboard.</p>
@@ -480,6 +489,17 @@ html, body { overflow-x: clip; }
         </div>
       </div>
       <img class="mac" src="w/myupes/mac.png" data-show="1160" data-phone="92vw" width="2110" height="1248" alt="">
+    </div>
+  </div>
+
+  <div class="item p c3 fy">
+    <img class="mark" src="w/fytn/logo.png" width="298" height="80" alt="Find Your True North logo">
+    <h3>Find Your True North</h3>
+    <p>My first internship, at a career guidance startup. I designed the logo and the website, with a home page, a career quiz and a blog.</p>
+    <div class="wall">
+      <div class="lane"><div class="belt up" style="--t:120s"><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="380" data-phone="31vw" alt="The Find Your True North home page"><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="380" data-phone="31vw" alt=""></div></div>
+      <div class="lane"><div class="belt down" style="--t:76s"><img src="w/fytn/quiz.jpg" width="1691" height="3756" data-show="380" data-phone="31vw" alt="The career quiz page"><img src="w/fytn/quiz.jpg" width="1691" height="3756" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/quiz.jpg" width="1691" height="3756" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/quiz.jpg" width="1691" height="3756" data-show="380" data-phone="31vw" alt=""></div></div>
+      <div class="lane"><div class="belt up" style="--t:92s"><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="380" data-phone="31vw" alt="The blog page"><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="380" data-phone="31vw" alt=""></div></div>
     </div>
   </div>
 
