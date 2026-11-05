@@ -268,9 +268,11 @@ html, body { overflow-x: clip; }
   .hci .pile .sticker { left: calc(var(--mu) * 100%); top: calc(var(--mv) * 100%); width: calc(var(--stick) * var(--mz)); transform: translate(-50%, -50%) rotate(var(--mr)); }
 }
 
-/* myUPES: the dashboard scrolling on a MacBook, with its nav pinned to the top like the real page */
-.item.p.lap { --lw: min(80vw, 1160px); --wood: clamp(44px, 5.4vw, 80px); position: relative; display: block; padding: 28px calc(50vw - 50%) var(--wood); }
-.item.p.lap::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--wood); background: url(w/myupes/wood.webp) 0 0 / auto 100% repeat-x; box-shadow: inset 0 1px 0 rgba(255,226,186,.38); }   /* the table's front edge, seen straight on, down to the bottom of the section */
+/* myUPES: the dashboard scrolling on a MacBook, in a painted study room that is out of focus behind it, with its nav pinned to the top like the real page */
+.item.p.lap { --c: #eadfce; --on: #33251a; background: #eadfce url(w/myupes/room.webp) 50% 30% / cover no-repeat; --lw: min(80vw, 1160px); --wood: clamp(44px, 5.4vw, 80px); position: relative; display: block; padding: 28px calc(50vw - 50%) var(--wood); }
+.lap .brand { margin: 0 0 12px; }
+.lap .brand img { display: block; width: auto; max-width: none; height: 48px; }
+.item.p.lap::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--wood); background: url(w/myupes/oak.webp) 0 0 / auto 100% repeat-x; box-shadow: inset 0 1px 0 rgba(255,244,222,.6); }   /* the table's front edge, seen straight on, down to the bottom of the section */
 .item.p.lap > p { max-width: 62ch; }
 .lap .laptop { position: relative; z-index: 1; width: var(--lw); aspect-ratio: 2110 / 1248; margin: 32px 0 0 50%; transform: translateX(-50%); }
 .lap .laptop::after { content: ""; position: absolute; left: 5%; right: 5%; bottom: -4px; height: 8px; z-index: 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.5), rgba(0,0,0,0)); }   /* where the base meets the table */
@@ -483,8 +485,8 @@ html, body { overflow-x: clip; }
     <div class="strip"><a class="phone pixel" href="w/twinbow-1.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#655a5e;--w:241px"><span class="shot"><img src="w/opt/twinbow-1-241.webp" srcset="w/opt/twinbow-1-241.webp 1x, w/opt/twinbow-1-463.webp 2x" width="241" height="520" style="width:241px" alt="Twinbow screen 1"></span></span></a><a class="phone pixel" href="w/twinbow-2.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#c6c6c6;--w:232px"><span class="shot"><img src="w/opt/twinbow-2-232.webp" srcset="w/opt/twinbow-2-232.webp 1x, w/opt/twinbow-2-393.webp 2x" width="232" height="520" style="width:232px" alt="Twinbow screen 2"></span></span></a><a class="phone pixel" href="w/twinbow-3.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#b0b0b0;--w:231px"><span class="shot"><img src="w/opt/twinbow-3-231.webp" srcset="w/opt/twinbow-3-231.webp 1x, w/opt/twinbow-3-393.webp 2x" width="231" height="520" style="width:231px" alt="Twinbow screen 3"></span></span></a><a class="phone pixel" href="w/twinbow-4.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#b2b1b9;--w:232px"><span class="shot"><img src="w/opt/twinbow-4-232.webp" srcset="w/opt/twinbow-4-232.webp 1x, w/opt/twinbow-4-392.webp 2x" width="232" height="520" style="width:232px" alt="Twinbow screen 4"></span></span></a><a class="phone pixel" href="w/twinbow-5.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#aeaeae;--w:230px"><span class="shot"><img src="w/opt/twinbow-5-230.webp" srcset="w/opt/twinbow-5-230.webp 1x, w/opt/twinbow-5-386.webp 2x" width="230" height="520" style="width:230px" alt="Twinbow screen 5"></span></span></a><a class="phone pixel" href="w/twinbow-6.jpg" target="_blank" rel="noopener"><span class="screen" style="--top:#89898b;--w:234px"><span class="shot"><img src="w/opt/twinbow-6-234.webp" srcset="w/opt/twinbow-6-234.webp 1x, w/opt/twinbow-6-450.webp 2x" width="234" height="520" style="width:234px" alt="Twinbow screen 6"></span></span></a></div>
   </div>
 
-  <div class="item p c2 lap">
-    <h3>myUPES</h3>
+  <div class="item p lap">
+    <h3 class="brand"><img src="w/opt/myupes-logo-157.webp" srcset="w/opt/myupes-logo-78.webp 78w, w/opt/myupes-logo-157.webp 157w, w/opt/myupes-logo-314.webp 314w" sizes="(max-width: 860px) 157px, 157px" width="373" height="114" alt="myUPES"></h3>
     <p>A redesign of the student portal at UPES, my university. It puts what students check every day on one dashboard.</p>
     <div class="laptop">
       <div class="display">
