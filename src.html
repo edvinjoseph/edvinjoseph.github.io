@@ -308,20 +308,37 @@ html, body { overflow-x: clip; }
   .gal .block { grid-template-rows: none; }
 }
 
-/* Find Your True North: the whole site as three columns drifting past each other */
-.item.p.fy { display: block; padding: 28px calc(50vw - 50%) 0; overflow: hidden; }
+/* Find Your True North: a wide printer feeding the site out as two long sheets, which run off the bottom of the section */
+.item.p.fy { --pw: min(100vw - 2 * var(--edge), 1160px); --ph: clamp(64px, 8.4vw, 112px); display: block; padding: 28px calc(50vw - 50%) 0; overflow: hidden; }
 .item.p.fy > p { max-width: 62ch; }
 .fy .mark { display: block; width: auto; max-width: none; height: 34px; margin: 0 0 16px; mix-blend-mode: screen; }
-.fy .wall { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: min(100vw - 2 * var(--edge), 1160px); height: min(76vh, 660px); margin: 20px 0 0 50%; transform: translateX(-50%); -webkit-mask-image: linear-gradient(transparent, #000 44px); mask-image: linear-gradient(transparent, #000 44px); }
-.fy .lane { overflow: hidden; border-radius: 12px 12px 0 0; min-width: 0; }
-.fy .belt { display: flex; flex-direction: column; animation: fy-up var(--t) linear infinite; will-change: transform; }
-.fy .belt.down { animation-name: fy-down; }
-.fy .belt img { display: block; width: 100%; height: auto; flex: none; margin-bottom: var(--gap, 16px); border-radius: 12px; }
+.fy .printer { position: relative; z-index: 1; width: var(--pw); height: var(--ph); margin: 22px 0 0 50%; transform: translateX(-50%); border-radius: 16px 16px 7px 7px; background: linear-gradient(#fbfbf9, #efeeea 30%, #e2e1dc 58%, #cfcec8 59%, #dddcd6 66%, #c5c4bd); box-shadow: inset 0 1px 0 #ffffff, inset 0 -2px 3px rgba(0,0,0,.18), 0 12px 20px -8px rgba(0,0,0,.5); }
+.fy .window { position: absolute; left: 3%; right: 26%; top: 15%; height: 30%; overflow: hidden; border-radius: 5px; background: linear-gradient(#2c3033, #3f4448); box-shadow: inset 0 2px 4px rgba(0,0,0,.6), 0 1px 0 rgba(255,255,255,.7); }
+.fy .window i { position: absolute; left: 0; top: 18%; bottom: 18%; width: 9%; border-radius: 3px; background: linear-gradient(#d9dadb, #8d9093); animation: fy-head 3.4s ease-in-out infinite alternate; }
+.fy .panel { position: absolute; right: 3%; top: 15%; width: 20%; height: 30%; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 3%; box-sizing: border-box; border-radius: 5px; background: linear-gradient(#22303a, #182229); box-shadow: inset 0 1px 3px rgba(0,0,0,.7), 0 1px 0 rgba(255,255,255,.7); }
+.fy .panel b { color: #9fe0ff; font: 600 clamp(8px, 1vw, 12px)/1 var(--text); letter-spacing: .02em; }
+.fy .panel i { flex: none; width: 7px; height: 7px; border-radius: 50%; background: #4fe07f; box-shadow: 0 0 6px #4fe07f; animation: fy-led 1.6s ease-in-out infinite; }
+.fy .slot { position: absolute; left: 2%; right: 2%; bottom: 13%; height: 12%; border-radius: 3px; background: linear-gradient(#050506, #2a2b2d); box-shadow: 0 1px 0 rgba(255,255,255,.55); }
+.fy .wall { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(2, 1fr); gap: 3%; width: calc(var(--pw) * .94); height: min(78vh, 680px); margin: calc(var(--ph) * -.2) 0 0 50%; transform: translateX(-50%); }
+.fy .lane { position: relative; overflow: hidden; min-width: 0; background: #ffffff; box-shadow: 0 0 14px rgba(0,0,0,.28); }
+.fy .lane::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 18px; background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,0)); pointer-events: none; }   /* the shadow of the slot on the paper */
+.fy .belt { display: flex; flex-direction: column; padding: 0 12px; animation: fy-feed var(--t) linear infinite; will-change: transform; }
+.fy .belt img { display: block; flex: none; width: 100%; max-width: none; height: auto; margin-bottom: 12px; }
+.fy .belt .only-phone { display: none; }
 .fy .wall:hover .belt { animation-play-state: paused; }
-@keyframes fy-up { to { transform: translateY(-25%); } }
-@keyframes fy-down { from { transform: translateY(-25%); } to { transform: translateY(0); } }
-@media (prefers-reduced-motion: reduce) { .fy .belt { animation: none; } }
-@media (max-width: 860px) { .fy .wall { gap: 8px; height: 110vw; } .fy .belt { --gap: 8px; } }
+@keyframes fy-feed { from { transform: translateY(-25%); } to { transform: translateY(0); } }
+@keyframes fy-head { to { left: 91%; } }
+@keyframes fy-led { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .fy .belt, .fy .window i, .fy .panel i { animation: none; } }
+@media (max-width: 860px) {
+  .fy .wall { grid-template-columns: 1fr; width: calc(var(--pw) * .9); height: 130vw; }
+  .fy .lane + .lane { display: none; }
+  .fy .belt { padding: 0 8px; }
+  .fy .belt img { margin-bottom: 8px; }
+  .fy .belt .only-phone { display: block; }
+  .fy .window { right: 38%; }
+  .fy .panel { width: 32%; }
+}
 
 /* breakouts (AR video, 3D Mac): the picture runs over the sections above and below,
    the text sits centred beside it. The picture, not the section, is lifted, so it clears every section's background */
@@ -496,10 +513,14 @@ html, body { overflow-x: clip; }
     <img class="mark" src="w/fytn/logo.png" width="298" height="80" alt="Find Your True North logo">
     <h3>Find Your True North</h3>
     <p>My first internship, at a career guidance startup. I designed the logo and the website, with a home page, a career quiz and a blog.</p>
+    <div class="printer" aria-hidden="true">
+      <span class="window"><i></i></span>
+      <span class="panel"><b>Printing</b><i></i></span>
+      <span class="slot"></span>
+    </div>
     <div class="wall">
-      <div class="lane"><div class="belt up" style="--t:120s"><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="380" data-phone="31vw" alt="The Find Your True North home page"><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="380" data-phone="31vw" alt=""></div></div>
-      <div class="lane"><div class="belt down" style="--t:76s"><img src="w/fytn/quiz.jpg" width="1691" height="3756" data-show="380" data-phone="31vw" alt="The career quiz page"><img src="w/fytn/quiz.jpg" width="1691" height="3756" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/quiz.jpg" width="1691" height="3756" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/quiz.jpg" width="1691" height="3756" data-show="380" data-phone="31vw" alt=""></div></div>
-      <div class="lane"><div class="belt up" style="--t:92s"><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="380" data-phone="31vw" alt="The blog page"><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="380" data-phone="31vw" alt=""><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="380" data-phone="31vw" alt=""></div></div>
+      <div class="lane"><div class="belt" style="--t:130s"><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="530" data-phone="86vw" alt="The Find Your True North home page"><img class="only-phone" src="w/fytn/blog.jpg" width="1512" height="3560" data-show="530" data-phone="86vw" alt=""><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="530" data-phone="86vw" alt=""><img class="only-phone" src="w/fytn/blog.jpg" width="1512" height="3560" data-show="530" data-phone="86vw" alt=""><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="530" data-phone="86vw" alt=""><img class="only-phone" src="w/fytn/blog.jpg" width="1512" height="3560" data-show="530" data-phone="86vw" alt=""><img src="w/fytn/home.jpg" width="1512" height="7440" data-show="530" data-phone="86vw" alt=""><img class="only-phone" src="w/fytn/blog.jpg" width="1512" height="3560" data-show="530" data-phone="86vw" alt=""></div></div>
+      <div class="lane"><div class="belt" style="--t:84s"><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="530" data-phone="86vw" alt="The blog page"><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="530" data-phone="86vw" alt=""><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="530" data-phone="86vw" alt=""><img src="w/fytn/blog.jpg" width="1512" height="3560" data-show="530" data-phone="86vw" alt=""></div></div>
     </div>
   </div>
 
