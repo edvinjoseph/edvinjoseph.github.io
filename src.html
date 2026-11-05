@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edvin Joseph</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Edvin Joseph: product, design and games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&family=Geist+Mono:wght@400&display=swap">
+<style>
+/* One column of text. One family. Hierarchy from weight and space only. */
+:root {
+  --edge: clamp(24px, 4vw, 56px);   /* breathing room for anything that runs to the window edge */
+  --bg: #f3f3f1;
+  --ink: #111111;
+  --mute: #74746f;
+  --rule: #dcdcd7;
+  --mark: #e0520b;
+  --text: "Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #14181c; --ink: #e9e9e6; --mute: #99aabb; --rule: #2c3440; --mark: #ff7a33; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #14181c; --ink: #e9e9e6; --mute: #99aabb; --rule: #2c3440; --mark: #ff7a33; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--text); -webkit-font-smoothing: antialiased; }
+main {
+  max-width: 680px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+h1, h2, h3 { font: 600 16px/1.6 var(--text); margin: 0; }
+h2 { margin: 72px 0 24px; }
+p { margin: 0 0 16px; max-width: 62ch; }
+a { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--mark); }
+a:focus-visible { outline: 2px solid var(--mark); outline-offset: 2px; }
+.m { color: var(--mute); }
+.meta { font: 400 13px/1.6 var(--mono); color: var(--mute); }
+header p { margin: 0; }
+header .intro { margin-top: 32px; }
+header .intro p { margin-bottom: 16px; }
+
+.item { margin: 0 0 48px; }
+.item h3 { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.item h3 .meta { font-weight: 400; text-align: right; }
+.item > p { margin: 2px 0 14px; color: var(--mute); }
+
+.strip {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start;
+}
+.strip a { flex: none; max-width: calc(50% - 5px); text-decoration: none; display: block; }
+.strip a.phone { max-width: none; }
+.strip img { display: block; height: auto; max-width: 100%; }
+.strip video { display: block; height: 240px; width: auto; background: #000; }
+.list li .strip { grid-column: 1 / -1; margin-top: 14px; }
+.list li.side video { height: 400px; border-radius: 10px; }
+
+.list { list-style: none; margin: 0; padding: 0; }
+.list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 24px; padding: 14px 0; border-top: 1px solid var(--rule); }
+.list li:last-child { border-bottom: 1px solid var(--rule); }
+.list li p { grid-column: 1 / -1; margin: 0; color: var(--mute); }
+.list .meta { text-align: right; }
+
+.lead h2 { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.results { margin: 20px 0; }
+/* The flame closes the page. */
+.seal { display: block; width: 63px; max-width: 100%; height: auto; margin: 112px 0 0; }
+blockquote { margin: 0; }
+.review { padding: 18px 0; border-top: 1px solid var(--rule); }
+.review:last-of-type { border-bottom: 1px solid var(--rule); }
+.review h3 { display: flex; justify-content: space-between; gap: 16px; }
+.review blockquote p { margin: 6px 0 0; color: var(--mute); }
+
+.contact p { margin: 0; }
+footer { margin-top: 24px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+
+/* each project carries one colour from the palette */
+.cb { --c: #000000; --on: #ffffff; }
+.cw { --c: #ffffff; --on: #111111; }
+.c1 { --c: #e0b33f; --on: #1a1a1a; }
+.c2 { --c: #b03a2e; --on: #ffffff; }
+.c3 { --c: #2f5b86; --on: #ffffff; }
+.c4 { --c: #8a4b22; --on: #ffffff; }
+.c5 { --c: #efd9d6; --on: #134754; }   /* the pale pink and teal of Phi's own palette */
+.c6 { --c: #d8d3c9; --on: #1a1a1a; }   /* a gallery wall: both the black and the white logos stand out on it */
+html, body { overflow-x: clip; }
+/* colour blocks run to the window edges while their text stays on the column */
+.p, .lb, .lb .review { margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%); }
+.p { background: var(--c); color: var(--on); --rule: color-mix(in srgb, var(--on) 25%, transparent); }
+.p h2, .p h3, .p p, .p a, .p .list li p { color: var(--on); }
+.p :focus-visible { outline-color: var(--on); }
+.lead.p { margin-top: 0; padding-block: 28px 8px; }
+.lead.p > h2 { margin: 0 0 16px; }
+.item.p { margin-bottom: 0; padding-block: 28px 24px; }
+.item.p > p { margin-bottom: 18px; }
+.list li.p { padding: 20px calc(50vw - 50%); border: 0; }
+.list li.p p { color: var(--on); }
+.list li.p p + p { margin-top: 8px; }
+
+/* writing: Letterboxd's slate, each review in one of its three dot colours */
+.lb { background: #14181c; color: #ddeeff; margin-top: 72px; padding-block: 28px 20px; }
+.lb > h2 { margin: 0 0 20px; color: #ffffff; }
+.lb > p.m { color: #99aabb; margin: 0 0 20px; }
+.lb > p.m a { color: #ffffff; }
+.lb .review { border: 0; margin-top: 0; padding-block: 18px; background: var(--lc); }
+.lb:has(.review) { padding-bottom: 0; }
+.lb .review { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 0 18px; align-items: start; }
+.lb .poster { display: block; width: 76px; height: 114px; object-fit: cover; }
+.lb.end { margin-top: 0; padding-block: 56px 40px; }
+.lb.end a { color: #ffffff; }
+.lb.end .seal { margin-top: 0; }
+.lb.end footer { color: #99aabb; }
+.lb.end footer .credit { font-size: .8em; }
+.lb.end footer .credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.lb .review:nth-of-type(3n+1) { --lc: #d98a3d; }
+.lb .review:nth-of-type(3n+2) { --lc: #55b07a; }
+.lb .review:nth-of-type(3n) { --lc: #5ea6cf; }
+.lb .review h3, .lb .review a, .lb .review blockquote p { color: #14181c; }
+.lb :focus-visible { outline-color: #ffffff; }
+
+
+/* the theme screenshot on a 3D MacBook (model: Poimandres, MIT) */
+.mac3d { grid-column: 1 / -1; position: relative; width: min(100%, 620px); aspect-ratio: 4 / 3; margin: 0 0 9%; cursor: grab; user-select: none; }
+.mac3d.dragging { cursor: grabbing; }
+/* the canvas reaches past the box on every side so a turned corner never gets cut off */
+.mac3d canvas { position: absolute; left: -10%; top: -12%; width: 120%; height: 124%; display: block; pointer-events: none; opacity: 0; transition: opacity .5s; }
+.mac3d.ready canvas { opacity: 1; }
+.mac3d { touch-action: pan-y; }
+.mac3d .mac-flat { position: absolute; inset: 12% 0 auto; display: block; transition: opacity .4s; }
+.mac3d .mac-flat img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.mac3d.ready .mac-flat { opacity: 0; pointer-events: none; }
+
+[id] { scroll-margin-top: 24px; }
+
+/* projects with images: text on the left, images on the right, running to the window edge */
+.item.p, .list li.p.side { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 40px; align-items: start; padding-right: 0; }
+.item.p > h3, .item.p > p, .list li.p.side > h3, .list li.p.side > p { grid-column: 1; }
+.item.p > .strip, .list li.p.side > .strip, .list li.p.side > .mac3d { grid-column: 2; grid-row: 1 / span 3; }
+.item.p > .strip, .list li.p.side > .strip { margin: 0; padding-right: 24px; }
+.list li.p.side > .mac3d { margin: 48px 24px 56px 0; width: min(calc(100% - 24px), 720px); aspect-ratio: 1; }
+@media (max-width: 860px) {
+  .item.p, .list li.p.side { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
+  .item.p > .strip, .list li.p.side > .strip, .list li.p.side > .mac3d { grid-column: 1; grid-row: auto; }
+  .item.p > .strip, .list li.p.side > .strip { margin-top: 14px; }
+  .item.p > h3, .item.p > p, .list li.p.side > h3, .list li.p.side > p { padding-right: 20px; }
+}
+
+/* flip: the picture on the left, the text on the right */
+.list li.p.side.flip { grid-template-columns: minmax(0, 1fr) minmax(0, 320px); padding-left: 0; padding-right: calc(50vw - 50%); }
+.list li.p.side.flip > h3, .list li.p.side.flip > p { grid-column: 2; }
+.list li.p.side.flip > .mac3d { grid-column: 1; margin: 48px 0 56px var(--edge); width: min(calc(100% - var(--edge)), 720px); justify-self: end; }
+@media (max-width: 860px) {
+  .list li.p.side.flip { grid-template-columns: minmax(0, 1fr); padding-left: calc(50vw - 50%); padding-right: 0; }
+  .list li.p.side.flip > h3, .list li.p.side.flip > p { grid-column: 1; }
+  .list li.p.side.flip > .mac3d { grid-column: 1; margin: 48px 24px 56px 0; justify-self: stretch; }
+}
+
+/* phone mockup */
+.strip .phone { position: relative; padding: 6px; margin: 4px 6px 12px; background: #0b0b0d; border-radius: 30px; box-shadow: 0 0 0 1.5px #6a6c72, 0 0 0 2.5px #2b2c30, 0 12px 20px -10px rgba(0,0,0,.55); }
+.strip .phone::before { content: ""; position: absolute; right: -4px; top: 23%; width: 2px; height: 13%; background: #6a6c72; border-radius: 0 2px 2px 0; }
+.strip .phone::after { content: ""; position: absolute; left: -4px; top: 19%; width: 2px; height: 17%; background: #6a6c72; border-radius: 2px 0 0 2px; }
+.phone .screen { display: block; position: relative; overflow: hidden; border-radius: 24px; background: #fff; }
+.phone .screen::after { content: ""; position: absolute; top: 6px; left: 50%; width: 30%; height: 13px; transform: translateX(-50%); background: #000; border-radius: 8px; }
+
+/* StreamX: large phones under the text, in a row that scrolls across the full window */
+.item.p.wide { display: block; padding-right: calc(50vw - 50%); }
+.item.p.wide > h3, .item.p.wide > p { padding-right: 0; }
+.item.p.wide > .strip { flex-wrap: nowrap; overflow-x: auto; margin: 20px calc(50% - 50vw) 0; padding: 6px var(--edge) 14px; gap: 16px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.4) transparent; }
+.item.p.wide > .strip.grab, .item.p.wide > .strip.grab a { cursor: grab; }
+.item.p.wide > .strip.dragging, .item.p.wide > .strip.dragging a { cursor: grabbing; user-select: none; }
+.item.p.wide > .strip > * { transform: translateX(var(--pull, 0)); }
+.item.p.wide .phone { flex: none; padding: 9px; margin: 4px 6px 14px; border-radius: 46px; }
+.item.p.wide .phone .screen { border-radius: 38px; }
+.item.p.wide .phone .screen::after { top: 10px; height: 22px; border-radius: 12px; }
+
+/* Pixel-style frame: squarer corners, centred hole punch, buttons on the right */
+.item.p.wide .phone.pixel { padding: 8px; border-radius: 36px; background: #101113; box-shadow: 0 0 0 1.5px #8d9096, 0 0 0 2.5px #3a3c40, 0 12px 20px -10px rgba(0,0,0,.55); }
+.item.p.wide .phone.pixel .screen { border-radius: 29px; }
+.item.p.wide .phone.pixel .screen::after { top: 11px; width: 15px; height: 15px; border-radius: 50%; background: #050506; }
+.strip .phone.pixel::before { top: 20%; height: 8%; background: #8d9096; }
+.strip .phone.pixel::after { left: auto; right: -4px; top: 32%; height: 14%; background: #8d9096; border-radius: 0 2px 2px 0; }
+
+/* frames: tighter corners, and nothing light can show around the screen edge */
+.phone .screen { background: #000; }
+.strip .phone .screen img { transform: scale(1.015); }
+.item.p.wide .phone { border-radius: 36px; }
+.item.p.wide .phone .screen { border-radius: 28px; }
+.item.p.wide .phone.pixel { border-radius: 17px; }
+.item.p.wide .phone.pixel .screen { border-radius: 10px; }
+
+/* Daac Metaworld: a Pinterest-style board on six columns. The moon, the visor itself, spans three and the alerts two;
+   the rest are placed by height so every column finishes level, with line art cards taking up any slack.
+   Phones flatten the nesting into two columns, with the three big pieces at full width */
+.item.p.daac { display: block; padding-right: calc(50vw - 50%); padding-bottom: 40px; }
+.item.p.daac > p { max-width: 62ch; }
+.daac .board { --g: 14px; display: flex; gap: var(--g); width: calc(min(100vw, 1400px) - 2 * var(--edge)); margin: 24px 0 0 calc(50% - min(50vw, 700px) + var(--edge)); }
+.daac .main { flex: 0 0 calc((100% - 5 * var(--g)) * .5 + 2 * var(--g)); min-width: 0; display: flex; flex-direction: column; gap: var(--g); }
+.daac .under, .daac .pair { flex: 1 1 auto; display: flex; gap: var(--g); min-width: 0; }
+.daac .wide { flex: 0 0 calc((100% - 2 * var(--g)) * 2 / 3 + var(--g)); min-width: 0; display: flex; flex-direction: column; gap: var(--g); }
+.daac .col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: var(--g); }
+.daac .pin { display: block; overflow: hidden; background: #000; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); cursor: zoom-in; text-decoration: none; transition: transform .25s; }
+.daac .pin:hover { transform: translateY(-3px); }
+.daac .pin img { display: block; width: 100%; height: auto; }
+.daac .pin.art { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; padding: 9%; }
+.daac .pin.light { background: #e9e4d8; }
+@media (max-width: 860px) {
+  .daac .board { --g: 10px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); width: calc(100vw - 2 * var(--edge)); margin-left: calc(50% - 50vw + var(--edge)); }
+  .daac .main, .daac .under, .daac .wide, .daac .pair, .daac .col.c, .daac .col.s, .daac .col.t, .daac .col.u { display: contents; }
+  .daac .big { grid-column: 1 / -1; }
+  .daac .big.moon { order: 1; }
+  .daac .big.hud { order: 2; }
+  .daac .big.alerts { order: 3; }
+  .daac .col.a { order: 4; }
+  .daac .col.b { order: 5; }
+  .daac .col.c > .pin, .daac .col.s > .pin, .daac .col.t > .pin, .daac .col.u > .pin { order: 6; }
+  .daac .pin.solo { order: 7; grid-column: 1 / -1; }
+}
+
+/* India HCI: the site scrolling inside a macOS Safari window, with its own stickers scattered across the section. Some
+   sit under the window, one on top, the rest loose or crossing into the sections either side */
+.item.p.hci { --stick: clamp(58px, 6.2vw, 94px); position: relative; display: block; padding: 28px calc(50vw - 50%) 96px; }
+.item.p.hci > p { max-width: 62ch; }
+.item.p.hci > p + p { margin-top: 10px; }
+.hci .pile { position: relative; width: min(62vw, 900px); margin: 60px 0 0 50%; transform: translateX(-50%); }
+.hci .browser { --bar: 52px; position: relative; z-index: 1; width: 100%; overflow: hidden; container-type: inline-size; border-radius: 10px; background: #000; box-shadow: 0 0 0 .5px rgba(0,0,0,.45), 0 8px 18px rgba(0,0,0,.2), 0 26px 60px -8px rgba(0,0,0,.42); }
+.hci .safari { display: flex; align-items: center; gap: 2px; height: var(--bar); padding: 0 12px 0 16px; font: 400 13px/1 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; box-sizing: border-box; }
+.hci .safari.dark { color: #e5e5e7; background: #2c2c2e; box-shadow: inset 0 -1px 0 #000; --well: rgba(255,255,255,.11); }
+.hci .safari.light { position: absolute; inset: 0 0 auto; z-index: 1; color: #3c3c43; background: #f6f6f7; box-shadow: inset 0 -1px 0 #d6d6d8; --well: rgba(0,0,0,.06); opacity: 0; transition: opacity .35s; }
+.hci .lights { display: flex; gap: 8px; margin-right: 14px; }
+.hci .lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.14); }
+.hci .lights i + i { background: #febc2e; }
+.hci .lights i + i + i { background: #28c840; }
+.hci .ic { flex: none; width: 28px; height: 28px; padding: 5px; box-sizing: border-box; fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; }
+.hci .ic.dim { opacity: .3; }
+.hci .field { flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 5px; position: relative; height: 28px; margin: 0 8px; padding: 0 28px; border-radius: 7px; background: var(--well); }
+.hci .field b { font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hci .field .lock { flex: none; width: 9px; height: 11px; fill: currentColor; opacity: .75; }
+.hci .field .ic { position: absolute; right: 3px; width: 22px; height: 22px; padding: 4px; opacity: .75; }
+@container (max-width: 470px) { .hci .ic.sidebar, .hci .ic.share { display: none; } }
+@container (max-width: 370px) { .hci .ic.plus, .hci .ic.forward { display: none; } .hci .lights { margin-right: 6px; } .hci .field { margin: 0 4px; } }
+.hci .scroll { height: min(74vh, 760px); overflow-y: auto; scrollbar-width: none; outline: none; }
+.hci .scroll::-webkit-scrollbar { display: none; }
+.hci .site { position: relative; }
+.hci .site img { display: block; width: 100%; height: auto; }
+.hci .site .light { position: absolute; inset: 0; opacity: 0; transition: opacity .35s; }
+.hci .toggle { position: absolute; left: 88.6%; top: 1.5%; width: 8.8%; height: 2.9%; padding: 0; border: 0; border-radius: 99px; background: transparent; cursor: pointer; }
+.hci .toggle:focus-visible { outline: 2px solid #2f7bff; outline-offset: 1px; }
+.hci .browser[data-shown="light"] .safari.light, .hci .browser[data-shown="light"] .site .light { opacity: 1; }
+.hci .sticker { position: absolute; left: calc(var(--u) * 100%); top: calc(var(--v) * 100%); width: calc(var(--stick) * var(--z)); max-width: none; height: auto; transform: translate(-50%, -50%) rotate(var(--r)); filter: drop-shadow(0 .5px .5px rgba(0,0,0,.3)) drop-shadow(0 1px 1.5px rgba(0,0,0,.12)); pointer-events: none; }
+.hci .sticker.over { z-index: 2; }
+.hci > .sticker { z-index: 3; left: calc(var(--u) * 1%); }
+.hci > .sticker.top { top: 0; }
+.hci > .sticker.bottom { top: 100%; }
+.hci > .sticker.near { left: calc(50% + var(--dx) * 1px); top: calc(var(--dy) * 1px); }
+@media (max-width: 1239px) { .hci > .sticker.top, .hci > .sticker.near { display: none; } }   /* the clear space runs out on narrower windows */
+@media (max-width: 860px) {
+  .item.p.hci { --stick: 62px; padding: 28px calc(50vw - 50%) 72px; }
+  .hci .pile { width: calc(100vw - 2 * var(--edge) - 12px); margin-top: 84px; }
+  .hci .scroll { height: 66vh; }
+  .hci > .sticker.bottom, .hci .pile .sticker[style*="--mz:0;"] { display: none; }
+  .hci .pile .sticker { left: calc(var(--mu) * 100%); top: calc(var(--mv) * 100%); width: calc(var(--stick) * var(--mz)); transform: translate(-50%, -50%) rotate(var(--mr)); }
+}
+
+/* myUPES: the dashboard scrolling on a MacBook, with its nav pinned to the top like the real page */
+.item.p.lap { --lw: min(80vw, 1160px); --wood: clamp(44px, 5.4vw, 80px); position: relative; display: block; padding: 28px calc(50vw - 50%) var(--wood); }
+.item.p.lap::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--wood); background: url(w/myupes/wood.webp) 0 0 / auto 100% repeat-x; box-shadow: inset 0 1px 0 rgba(255,226,186,.38); }   /* the table's front edge, seen straight on, down to the bottom of the section */
+.item.p.lap > p { max-width: 62ch; }
+.lap .laptop { position: relative; z-index: 1; width: var(--lw); aspect-ratio: 2110 / 1248; margin: 32px 0 0 50%; transform: translateX(-50%); }
+.lap .laptop::after { content: ""; position: absolute; left: 5%; right: 5%; bottom: -4px; height: 8px; z-index: 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.5), rgba(0,0,0,0)); }   /* where the base meets the table */
+.lap .mac { position: absolute; inset: 0; z-index: 2; display: block; width: 100%; max-width: none; height: 100%; pointer-events: none; }
+.lap .display { position: absolute; z-index: 1; left: calc(9.431% - 1px); top: calc(3.285% - 1px); width: calc(82.133% + 2px); height: calc(86.779% + 2px); overflow: hidden; background: #e4e4e4; }
+.lap .scroller { position: absolute; inset: 0; overflow: auto; scrollbar-width: none; outline: none; }
+.lap .scroller::-webkit-scrollbar { display: none; }
+.lap .sheet { position: relative; }
+.lap .shot { display: block; width: 100%; max-width: none; height: auto; }
+.lap .pin { position: sticky; top: 0; z-index: 1; display: flow-root; height: 0; pointer-events: none; }
+.lap .pin img { display: block; width: 41.806%; max-width: none; height: auto; margin: 0.347% 0 0 29.097%; }
+@media (max-width: 860px) {
+  .item.p.lap { --lw: calc(100vw - 2 * var(--edge)); }
+  .lap .laptop { margin-top: 20px; }
+  .lap .sheet { width: 560px; }   /* the page stays readable, and people pan around it */
+}
+
+/* Phi, UCLCD and Misc: justified rows, where every picture in a row is the same height and every row ends on the same edge */
+.item.p.gal { display: block; padding: 28px calc(50vw - 50%) 40px; }
+.item.p.gal > p { max-width: 62ch; }
+.gal .set { display: grid; gap: 10px; width: min(100vw - 2 * var(--edge), 1160px); margin: 8px 0 0 50%; transform: translateX(-50%); }
+.gal .row { display: grid; grid-template-columns: var(--cols); gap: 10px; min-width: 0; }
+.gal .row.wrap { display: flex; }
+.gal .row.wrap > .row, .gal .row.wrap > .block { flex: var(--g) 1 var(--b); }   /* the two halves share out the width so they come out exactly the same height */
+.gal .block { display: grid; grid-template-rows: var(--rows); gap: 10px; min-width: 0; min-height: 0; }
+.gal .block > .row { min-height: 0; }
+.gal .stack { display: grid; grid-template-rows: 1fr 1fr; gap: 10px; min-width: 0; min-height: 0; }
+.gal .set a { display: block; min-width: 0; min-height: 0; }
+.gal .set img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.phi .first { display: grid; grid-template-columns: 1fr 3.095fr; gap: 10px; }
+.phi .tints { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.misc .set { margin-top: 16px; }
+@media (max-width: 860px) {
+  .phi .tints { grid-template-columns: repeat(2, 1fr); }
+  .gal .row.wrap { flex-direction: column; }
+  .gal .row.wrap > .row, .gal .row.wrap > .block { flex: none; }
+  .gal .block { grid-template-rows: none; }
+}
+
+/* breakouts (AR video, 3D Mac): the picture runs over the sections above and below,
+   the text sits centred beside it. The picture, not the section, is lifted, so it clears every section's background */
+.list li.p.side.over { grid-template-rows: 1fr auto auto 1fr; }
+.list li.p.side.over > h3 { grid-row: 2; }
+.list li.p.side.over > p { grid-row: 3; }
+.list li.p.side.over > .strip, .list li.p.side.over > .mac3d { grid-row: 1 / -1; position: relative; z-index: 2; }
+.list li.p.side.over > .strip { margin: -64px 0; padding: 0; overflow: visible; }
+.list li.p.side.over.flip > .mac3d { margin: -80px 0 -80px var(--edge); }
+.list li.p:has(+ li.p.side.over.flip) { padding-bottom: 76px; }   /* room for the Mac's top, so it never sits on text */
+.list li.side.over video { height: 480px; border-radius: 30px; corner-shape: squircle; box-shadow: 0 18px 40px -14px rgba(0,0,0,.6); }
+@media (max-width: 860px) {
+  .list li.p.side.over { grid-template-rows: none; }
+  .list li.p.side.over > h3, .list li.p.side.over > p, .list li.p.side.over > .strip, .list li.p.side.over > .mac3d { grid-row: auto; }
+  .list li.p.side.over > .strip { margin: 14px 0 0; }
+  .list li.p.side.over.flip > .mac3d { margin: 8px 24px 0 0; }
+  .list li.p:has(+ li.p.side.over.flip) { padding-bottom: 20px; }
+}
+/* Poker: its logo sits top centre, so the camera moves to the side */
+.item.p.wide.punch .phone .screen::after { top: 14px; left: 14px; width: 15px; height: 15px; border-radius: 50%; transform: none; background: #000; }
+/* StreamX: white headroom so the status bar lines up with the island and content clears it */
+/* a slim band above the screenshot clears the pill; it takes the screenshot's own top colour (set by build.py), so no seam shows */
+.item.p.wide:not(.punch) .phone:not(.pixel) .screen { padding-top: 8px; background: var(--top, #fff); }
+/* the screenshots carry a faint 1px export border: .shot crops it off on every side, without touching the band above */
+.phone .shot { display: block; }
+.item.p.wide:not(.punch) .phone:not(.pixel) .shot { width: var(--w); overflow: hidden; }
+/* widths stay in px: a % here would size the phone from the image file's full width */
+.item.p.wide:not(.punch) .phone:not(.pixel) .screen img { transform: none; width: calc(var(--w) + 3px) !important; max-width: none; margin: -1.5px -1.5px -1.5px; }
+/* Poker: only three screens, so they sit centred; auto margins fall back to the left if they ever need to scroll */
+.item.p.wide.punch > .strip > :first-child { margin-left: auto; }
+.item.p.wide.punch > .strip > :last-child { margin-right: auto; }
+
+/* opening: black so the gate image sits seamlessly on it */
+.opening { margin-inline: calc(50% - 50vw); padding: 64px calc(50vw - 50%) 24px; background: #000; color: #e9e9e6; --ink: #e9e9e6; --mute: #99aabb; --rule: #2c3440; }
+.gate { display: block; width: 186px; max-width: 100%; height: auto; margin-bottom: 28px; }
+.opening > h2:last-child { margin-bottom: 0; }
+</style>
+
+<main>
+  <div class="opening">
+  <header>
+    <img class="gate" fetchpriority="high" src="w/gate.png" width="727" height="473" alt="Line drawing of a split temple gate from the Daac Metaworld helmet display">
+    <h1>Edvin Joseph</h1>
+    <p class="m">Product, Bengaluru, India.</p>
+    <div class="intro">
+      <p>I'm moving into product after almost two years as a software developer at fast-moving startups. I loved taking part in product discussions and decisions, suggesting features and working out tradeoffs with producers, designers and artists.</p>
+      <p>I'm a computer engineer and a NextLeap product management fellow, and I want to work on the product side full time.</p>
+    </div>
+  </header>
+
+  <h2 class="title" id="contact">Contact</h2>
+  <div class="contact">
+    <p><a href="mailto:theedvinjoseph@gmail.com">theedvinjoseph@gmail.com</a></p>
+    <p><a href="https://linkedin.com/in/edvin-joseph" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/niap3" target="_blank" rel="noopener">GitHub</a> · <a href="https://letterboxd.com/edvinjoseph/" target="_blank" rel="noopener">Letterboxd</a></p>
+  </div>
+
+  <h2 class="title" id="experience">Experience</h2>
+  <ul class="list">
+    <li><h3>Sabit, founding developer</h3><p>Since 2026. I build the whole app, from the reading timers to the backend.</p></li>
+    <li><h3>Brightpoint Studios, associate software engineer</h3><p>June 2024 to January 2026. I built features for Solitaire Castle Royal, including the global leaderboard, the lives system and a rewarded-ad loop. I translated the game into 6 languages and built tools so designers could make levels on their own.</p></li>
+    <li><h3>NextLeap, product management fellow</h3><p>Finished the fellowship in June 2026.</p></li>
+    <li><h3>UPES, B.Tech in computer science</h3><p>Studied graphics and game programming. Graduated in 2025.</p></li>
+  </ul>
+
+  <h2 class="title" id="work">Work</h2>
+  </div>
+  <section class="lead p c1">
+    <h2>Stein</h2>
+    <p>Stein is a deduction engine I'm building, a neuro-symbolic AI that arrives at answers systematically and deductively. It's useful when there needs to be absolute certainty about the answer, and it gets there through data collection and logic processing. It isn't public yet.</p>
+      <ul class="list results">
+        <li><h3>Logic grid puzzles</h3><p>Stein got all 40 right against Claude Sonnet 5.5's 39.</p></li>
+        <li><h3>MathConstraint problems</h3><p>On 113 constraint problems Stein's latest answers are 111 right and none wrong. The other two were long searches stopped by hand. Sonnet got 106 right and 7 wrong.</p></li>
+        <li><h3>Erdős problem #7</h3><p>This open problem asks whether a covering system with distinct odd moduli exists. Stein proved that none exists when the least common multiple of the moduli is at most 10,394. It then independently confirmed a much stronger claim from a 2026 preprint that none exists below 11,486,475.</p></li>
+        <li><h3>Date conversion</h3><p>Every program that shows you a date has to turn a day number into a year, month and day. Stein was handed a reference that does this and asked for fast code. It found the constant 2939745, the same one Neri and Schneider published. Then it wrote x86-64 assembly and proved it right on all 4,294,967,296 32-bit inputs.</p></li>
+        <li><h3>Character width in the Ghostty terminal</h3><p>Ghostty looks up a character's width in a three-level table. Stein derived a two-level table with no branch and proved it equal to Ghostty's lookup on all 1,114,112 codepoints. It won a timed race at 6.32 ns against 6.81 ns per pair of calls.</p></li>
+        <li><h3>Schur numbers, in the general loop</h3><p>Color the integers 1 to N with k colors so that no color contains x, y and x + y. How large can N get? Given only that definition the loop proved the known answers for 1 to 4 colors (1, 4, 13 and 44).</p></li>
+      </ul>
+  </section>
+  <ul class="list">
+    <li class="p c2"><h3>Sabit</h3><p>The only developer on Sabit, a Qur'an reading app that turns daily reading into a game. I'm part of almost every product discussion, and many of the app's core features started as my suggestions.</p><p>Flagged that the app we were drawing from probably had a timer you could cheat by changing the phone's clock, a tradeoff I'd seen at Brightpoint. It did. That decided how we built ours.</p><p>Built the app end to end: reading timers, rewards, a courtyard you decorate, levels, the backend and database, server-side content, localisation and Firebase Analytics.</p></li>
+    <li class="p c3"><h3>Blinkit Unlock</h3><p>People on Blinkit buy the same few things and hardly ever try another category. I tagged 6,072 reviews against a 30-label taxonomy and built a BM25 search tool to dig through them. Mostly it came down to habit. People don't buy what they don't usually buy. I prototyped an unlock that puts a nearby category in front of them between cart and delivery.</p></li>
+    <li class="p c4"><h3>Discovery Copilot</h3><p>Spotify users say their recommendations go stale. I built Signal, an AI tool to sort through their reviews, and underneath most of it was one complaint. They can't steer the algorithm. So I made an MVP that lets them.</p></li>
+    <li class="p c1 side flip over"><h3><a href="https://marketplace.visualstudio.com/items?itemName=theedvinjoseph.vintage-windows-machine-theme" target="_blank" rel="noopener">Vintage Windows Machine</a></h3><p>A retro Windows-style theme for VS Code. 3,514 installs on the Marketplace.</p><div class="mac3d" data-model="w/mac-classic-glb.json" data-skin="w/mac-classic.jpg" data-screen="w/vwm-1.jpg"><a class="mac-flat" href="w/vwm-1.jpg" target="_blank" rel="noopener"><img src="w/vwm-1.jpg" width="1800" height="1131" alt="VS Code in the Vintage Windows Machine theme" loading="lazy"></a></div></li>
+    <li class="p c2 side over"><h3>AR at UPES</h3><p>Led the Lens Studio work on a graduation lens that 200,000+ people used. Also led a team that built AR mini-games for a campus treasure hunt. It was picked among the best at SOCS Expo 2024.</p><div class="strip"><video src="w/ar-upes.mp4" poster="w/ar-upes-poster.jpg" width="228" height="480" controls muted loop playsinline preload="auto" data-play aria-label="An AR campus map rising out of a UPES ID card"></video></div></li>
+  </ul>
+
+
+  <div class="item p c3 wide">
+    <h3>StreamX</h3>
+    <p>A live-streaming app I designed for FrameX, a national hackathon at IIT BHU. It won third place. The final screens come first, then the wireframes.</p>
+    <div class="strip" data-imgs="streamx-1.jpg streamx-2.jpg streamx-3.jpg streamx-4.jpg streamx-5.jpg streamx-6.jpg streamx-wire-1.jpg streamx-wire-2.jpg streamx-wire-3.jpg" data-frame="phone" data-alt="StreamX screen"></div>
+  </div>
+
+  <div class="item p cb daac">
+    <h3>Daac Metaworld</h3>
+    <p>A team project that lets you walk on a simulated moon surface. We built a mechanical rig you stand in, a VR simulation and the headset setup. I designed the display the astronaut sees inside the helmet, including the line mandalas.</p>
+    <div class="board">
+      <div class="main">
+        <div class="big moon"><a class="pin" href="w/daac/moon.jpg" target="_blank" rel="noopener"><img src="w/daac/moon.jpg" width="935" height="440" alt="The moon surface seen through the helmet display" loading="lazy"></a></div>
+        <div class="under">
+          <div class="wide">
+            <div class="big alerts"><a class="pin" href="w/daac/alerts.jpg" target="_blank" rel="noopener"><img src="w/daac/alerts.jpg" width="1500" height="466" alt="Alert cards and golden spiral studies" loading="lazy"></a></div>
+            <div class="pair">
+              <div class="col a"><a class="pin art" href="w/daac/lattice.png" target="_blank" rel="noopener"><img src="w/daac/lattice.png" width="789" height="1352" alt="The star lattice in line art" loading="lazy"></a></div>
+              <div class="col b"><a class="pin" href="w/daac/kolam.jpg" target="_blank" rel="noopener"><img src="w/daac/kolam.jpg" width="1000" height="755" alt="A lotus line drawing over a kolam on a stone floor" loading="lazy"></a><a class="pin art" href="w/daac/callout-c.png" target="_blank" rel="noopener"><img src="w/daac/callout-c.png" width="1000" height="768" alt="A Fuel Tank callout in an outlined panel" loading="lazy"></a></div>
+            </div>
+          </div>
+          <div class="col c"><a class="pin" href="w/daac/jali.jpg" target="_blank" rel="noopener"><img src="w/daac/jali.jpg" width="640" height="848" alt="A line pattern drawn over a carved stone jali screen" loading="lazy"></a><a class="pin art" href="w/daac/callout-b.png" target="_blank" rel="noopener"><img src="w/daac/callout-b.png" width="1000" height="768" alt="A Fuel Tank callout on a grey panel" loading="lazy"></a></div>
+        </div>
+      </div>
+      <div class="col s"><div class="big hud"><a class="pin" href="w/daac/hud.jpg" target="_blank" rel="noopener"><img src="w/daac/hud.jpg" width="1000" height="861" alt="Helmet readouts: temperature, oxygen and a meteor shower alert" loading="lazy"></a></div><a class="pin art" href="w/daac/flower.png" target="_blank" rel="noopener"><img src="w/daac/flower.png" width="610" height="668" alt="A flower of life" loading="lazy"></a><a class="pin art light" href="w/daac/visor.png" target="_blank" rel="noopener"><img src="w/daac/visor.png" width="1000" height="1467" alt="The visor shape with its readouts" loading="lazy"></a><a class="pin art" href="w/daac/heading.png" target="_blank" rel="noopener"><img src="w/daac/heading.png" width="388" height="78" alt="The heading indicator" loading="lazy"></a></div>
+      <div class="col t"><a class="pin art" href="w/daac/lattice-svg.svg" target="_blank" rel="noopener"><img src="w/daac/lattice-svg.svg" width="395" height="676" alt="The star lattice pattern" loading="lazy"></a><a class="pin art" href="w/daac/fuel.png" target="_blank" rel="noopener"><img src="w/daac/fuel.png" width="312" height="34" alt="A fuel gauge reading 500 of 1000 kg" loading="lazy"></a><a class="pin art" href="w/daac/callout-a.png" target="_blank" rel="noopener"><img src="w/daac/callout-a.png" width="992" height="771" alt="A Fuel Tank callout" loading="lazy"></a><a class="pin art" href="w/daac/yantra.png" target="_blank" rel="noopener"><img src="w/daac/yantra.png" width="343" height="354" alt="A Sri Yantra" loading="lazy"></a></div>
+      <div class="col u"><a class="pin art" href="w/daac/patterns.png" target="_blank" rel="noopener"><img src="w/daac/patterns.png" width="1000" height="1752" alt="A sheet of line pattern studies" loading="lazy"></a><a class="pin art light" href="w/daac/lattice-fill.png" target="_blank" rel="noopener"><img src="w/daac/lattice-fill.png" width="1000" height="1169" alt="The star lattice filling the visor shape" loading="lazy"></a><a class="pin art" href="w/daac/mandala.png" target="_blank" rel="noopener"><img src="w/daac/mandala.png" width="1000" height="1020" alt="A line mandala" loading="lazy"></a></div>
+    </div>
+  </div>
+
+  <div class="item p c4 wide">
+    <h3>Twinbow</h3>
+    <p>A voice chat app I designed as a personal project. Each conversation is a tile you can join and leave.</p>
+    <div class="strip" data-imgs="twinbow-1.jpg twinbow-2.jpg twinbow-3.jpg twinbow-4.jpg twinbow-5.jpg twinbow-6.jpg" data-frame="pixel" data-alt="Twinbow screen"></div>
+  </div>
+
+  <div class="item p c1 wide punch">
+    <h3>Poker</h3>
+    <p>A concept for a dating app that deals you profiles like playing cards.</p>
+    <div class="strip" data-imgs="poker-1.jpg poker-2.jpg poker-3.jpg" data-frame="phone" data-alt="Poker dating app screen"></div>
+  </div>
+
+  <div class="item p cw hci">
+    <h3>India HCI 2023</h3>
+    <p>India HCI is India's conference on human-computer interaction. The series began in 2004 and moves to a different city each year.</p>
+    <p>The 14th edition was hosted by the School of Design at UPES in Dehradun, on the theme HCI for Enabling Creativity. Keynotes came from Prof Janet Read, Prof Venkatesh Rajamanickam, Lawrence Lu and Dr Balvinder Singh.</p>
+    <p>I designed the logo, the badges and the website in dark and light versions. The stickers use old computer icons and were made to decorate the site.</p>
+    <div class="pile">
+      <img class="sticker under" style="--u:-0.038;--v:0.28;--z:1.0;--r:7deg;--mu:0.3;--mv:-0.035;--mz:0.85;--mr:7deg" src="w/hci/sticker-6.png" width="194" height="194" data-show="130" data-phone="18vw" alt="">
+      <img class="sticker free" style="--u:-0.205;--v:0.6;--z:1.15;--r:-9deg;--mu:0.08;--mv:-0.045;--mz:0.85;--mr:-9deg" src="w/hci/sticker-7.png" width="224" height="212" data-show="130" data-phone="18vw" alt="">
+      <img class="sticker under" style="--u:1.04;--v:0.05;--z:1.0;--r:15deg;--mu:0.6;--mv:-0.04;--mz:0.85;--mr:15deg" src="w/hci/sticker-5.png" width="185" height="191" data-show="130" data-phone="18vw" alt="">
+      <img class="sticker free" style="--u:1.215;--v:0.34;--z:1.05;--r:8deg;--mu:0.62;--mv:1.05;--mz:0.95;--mr:8deg" src="w/hci/sticker-3.png" width="172" height="212" data-show="130" data-phone="18vw" alt="">
+      <img class="sticker under" style="--u:1.045;--v:0.66;--z:1.25;--r:9deg;--mu:0.86;--mv:1.045;--mz:1.05;--mr:9deg" src="w/hci/sticker-8.png" width="200" height="218" data-show="130" data-phone="18vw" alt="">
+      <img class="sticker under" style="--u:0.42;--v:1.036;--z:1.55;--r:-8deg;--mu:0.36;--mv:1.04;--mz:1.4;--mr:-8deg" src="w/hci/sticker-11.png" width="354" height="207" data-show="130" data-phone="18vw" alt="">
+      <div class="browser" data-shown="dark">
+        <div class="safari dark"><span class="lights"><i></i><i></i><i></i></span><svg class="ic sidebar" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="2.6"/><path d="M7.6 4v12"/><path d="M4.5 7h1M4.5 9h1M4.5 11h1"/></svg><svg class="ic back" viewBox="0 0 20 20" aria-hidden="true"><path d="M12.2 4 6.2 10l6 6"/></svg><svg class="ic forward dim" viewBox="0 0 20 20" aria-hidden="true"><path d="m7.8 4 6 6-6 6"/></svg><span class="field"><svg class="lock" viewBox="0 0 12 14" aria-hidden="true"><path d="M2.6 6V4.2a3.4 3.4 0 0 1 6.8 0V6h.3c.7 0 1.3.6 1.3 1.3v4.9c0 .7-.6 1.3-1.3 1.3H2.3c-.7 0-1.3-.6-1.3-1.3V7.3C1 6.600 1.600 6 2.300 6h.3Zm1.500 0h3.800V4.200a1.900 1.900 0 0 0-3.800 0V6Z"/></svg><b>indiahci.org</b><svg class="ic reload" viewBox="0 0 20 20" aria-hidden="true"><path d="M15.6 10a5.6 5.6 0 1 1-1.7-4"/><path d="M14.2 2.8v3.5h-3.5"/></svg></span><svg class="ic share" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 8H5.6A1.6 1.6 0 0 0 4 9.6v6.8A1.6 1.6 0 0 0 5.6 18h8.8a1.6 1.6 0 0 0 1.6-1.6V9.6A1.6 1.6 0 0 0 14.4 8H13"/><path d="M10 12.6V2.4M6.9 5.2 10 2.2l3.1 3"/></svg><svg class="ic plus" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.6v12.8M3.6 10h12.8"/></svg><svg class="ic tabs" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.8" y="6.2" width="11" height="11" rx="2.6"/><path d="M6.4 3.2h7.8a2.6 2.6 0 0 1 2.6 2.6v7.8"/></svg></div>
+        <div class="safari light"><span class="lights"><i></i><i></i><i></i></span><svg class="ic sidebar" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="2.6"/><path d="M7.6 4v12"/><path d="M4.5 7h1M4.5 9h1M4.5 11h1"/></svg><svg class="ic back" viewBox="0 0 20 20" aria-hidden="true"><path d="M12.2 4 6.2 10l6 6"/></svg><svg class="ic forward dim" viewBox="0 0 20 20" aria-hidden="true"><path d="m7.8 4 6 6-6 6"/></svg><span class="field"><svg class="lock" viewBox="0 0 12 14" aria-hidden="true"><path d="M2.6 6V4.2a3.4 3.4 0 0 1 6.8 0V6h.3c.7 0 1.3.6 1.3 1.3v4.9c0 .7-.6 1.3-1.3 1.3H2.3c-.7 0-1.3-.6-1.3-1.3V7.3C1 6.600 1.600 6 2.300 6h.3Zm1.500 0h3.800V4.200a1.900 1.900 0 0 0-3.800 0V6Z"/></svg><b>indiahci.org</b><svg class="ic reload" viewBox="0 0 20 20" aria-hidden="true"><path d="M15.6 10a5.6 5.6 0 1 1-1.7-4"/><path d="M14.2 2.8v3.5h-3.5"/></svg></span><svg class="ic share" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 8H5.6A1.6 1.6 0 0 0 4 9.6v6.8A1.6 1.6 0 0 0 5.6 18h8.8a1.6 1.6 0 0 0 1.6-1.6V9.6A1.6 1.6 0 0 0 14.4 8H13"/><path d="M10 12.6V2.4M6.9 5.2 10 2.2l3.1 3"/></svg><svg class="ic plus" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.6v12.8M3.6 10h12.8"/></svg><svg class="ic tabs" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.8" y="6.2" width="11" height="11" rx="2.6"/><path d="M6.4 3.2h7.8a2.6 2.6 0 0 1 2.6 2.6v7.8"/></svg></div>
+        <div class="scroll" tabindex="0" aria-label="The India HCI 2023 website">
+          <div class="site">
+            <img src="w/hci/web-dark.jpg" width="1400" height="2713" data-show="900" data-phone="92vw" alt="The India HCI 2023 website in its dark theme">
+            <img class="light" src="w/hci/web-light.jpg" width="1400" height="2713" data-show="900" data-phone="92vw" alt="The same website in its light theme">
+            <button class="toggle" type="button" aria-label="Switch the site between dark and light"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img class="sticker top" style="--u:7.5;--v:0;--z:1.3;--r:-14deg;--mu:0.08;--mv:-0.055;--mz:1.0;--mr:-14deg" src="w/hci/sticker-9.png" width="243" height="243" data-show="130" data-phone="18vw" alt="">
+    <img class="sticker top" style="--u:91.5;--v:0;--z:1.2;--r:12deg;--mu:0.88;--mv:-0.05;--mz:1.0;--mr:12deg" src="w/hci/sticker-10.png" width="249" height="254" data-show="130" data-phone="18vw" alt="">
+    <img class="sticker near" style="--dx:-424;--dy:118;--z:1.15;--r:-12deg" src="w/hci/sticker-12.png" width="252" height="240" data-show="130" data-phone="18vw" alt="">
+    <img class="sticker near" style="--dx:436;--dy:128;--z:1.0;--r:10deg" src="w/hci/sticker-2.png" width="149" height="178" data-show="130" data-phone="18vw" alt="">
+    <img class="sticker near" style="--dx:-566;--dy:196;--z:1.0;--r:-8deg" src="w/hci/sticker-1.png" width="149" height="176" data-show="130" data-phone="18vw" alt="">
+  </div>
+
+  <div class="item p c3">
+    <h3>Find Your True North</h3>
+    <p>My first internship, at a career guidance startup. I designed the logo and the website, with a home page, a career quiz, a team page and a blog.</p>
+    <div class="strip" data-imgs="fytn-2.jpg fytn-3.jpg fytn-4.jpg fytn-5.jpg fytn-1.png" data-alt="Find Your True North"></div>
+  </div>
+
+  <div class="item p c2 lap">
+    <h3>myUPES</h3>
+    <p>A redesign of the student portal at UPES, my university. It puts what students check every day on one dashboard.</p>
+    <div class="laptop">
+      <div class="display">
+        <div class="scroller" tabindex="0" aria-label="The myUPES dashboard">
+          <div class="sheet">
+            <div class="pin"><img src="w/myupes/nav.png" width="1204" height="290" data-show="400" data-phone="234px" alt=""></div>
+            <img class="shot" src="w/myupes/page.jpg" width="2880" height="3152" data-show="955" data-phone="560px" alt="The myUPES dashboard, one page of rounded cards">
+          </div>
+        </div>
+      </div>
+      <img class="mac" src="w/myupes/mac.png" data-show="1160" data-phone="92vw" width="2110" height="1248" alt="">
+    </div>
+  </div>
+
+  <div class="item p c5 phi gal">
+    <h3>Phi</h3>
+    <p>A logo for a client. It started as a pencil sketch and ended as a mark in six weights and five colours.</p>
+    <div class="set">
+      <div class="first">
+        <a href="w/phi-1.jpg" target="_blank" rel="noopener"><img src="w/phi-1.jpg" width="700" height="700" data-show="280" data-phone="23vw" alt="The pencil sketch the Phi logo started from"></a>
+        <a href="w/phi-8.png" target="_blank" rel="noopener"><img src="w/phi-8.png" width="1600" height="517" data-show="870" data-phone="68vw" alt="The Phi logo in six weights"></a>
+      </div>
+      <div class="tints">
+        <a href="w/phi-3.png" target="_blank" rel="noopener"><img src="w/phi-3.png" width="1505" height="700" data-show="380" data-phone="46vw" alt="The Phi logo in white on black"></a>
+        <a href="w/phi-4.png" target="_blank" rel="noopener"><img src="w/phi-4.png" width="1505" height="700" data-show="380" data-phone="46vw" alt="The Phi logo in black on white"></a>
+        <a href="w/phi-2.png" target="_blank" rel="noopener"><img src="w/phi-2.png" width="1505" height="700" data-show="380" data-phone="46vw" alt="The Phi logo in pale pink on deep teal"></a>
+        <a href="w/phi-5.png" target="_blank" rel="noopener"><img src="w/phi-5.png" width="1505" height="700" data-show="380" data-phone="46vw" alt="The Phi logo in green"></a>
+        <a href="w/phi-6.png" target="_blank" rel="noopener"><img src="w/phi-6.png" width="1505" height="700" data-show="380" data-phone="46vw" alt="The Phi logo in blue"></a>
+        <a href="w/phi-7.png" target="_blank" rel="noopener"><img src="w/phi-7.png" width="1505" height="700" data-show="380" data-phone="46vw" alt="The Phi logo in black on red"></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="item p c3 gal">
+    <h3>UCLCD</h3>
+    <p>A logo for the Users Cognitive Load Centric Design Lab, a research lab at UPES. The letters sit above a smile, so the mark reads as a face. A second version swaps the smile for a VR headset, for the lab's VR work.</p>
+    <div class="set">
+      <div class="row wrap"><div class="row" style="--cols:1.757fr;--g:1.757;--b:0px"><a href="w/ucdlc-5.png" target="_blank" rel="noopener"><img src="w/ucdlc-5.png" width="1400" height="797" data-show="557" data-phone="92vw" alt="The UCLCD wordmark, with the L sitting above a smile"></a></div><div class="row" style="--cols:1.872fr;--g:1.872;--b:0px"><a href="w/ucdlc-6.png" target="_blank" rel="noopener"><img src="w/ucdlc-6.png" width="1400" height="748" data-show="593" data-phone="92vw" alt="The wordmark drawn as a face with its eyes open"></a></div></div>
+      <div class="row wrap"><div class="row" style="--cols:3.248fr;--g:3.248;--b:0px"><a href="w/ucdlc-7.png" target="_blank" rel="noopener"><img src="w/ucdlc-7.png" width="1400" height="431" data-show="861" data-phone="92vw" alt="Three versions of the CLCD face"></a></div><div class="row" style="--cols:1.093fr;--g:1.093;--b:0px"><a href="w/ucdlc-4.png" target="_blank" rel="noopener"><img src="w/ucdlc-4.png" width="778" height="712" data-show="289" data-phone="92vw" alt="The VR headset version of the logo, in black"></a></div></div>
+      <div class="row wrap"><div class="row" style="--cols:0.866fr 0.866fr;--g:1.732;--b:10px"><a href="w/ucdlc-1.png" target="_blank" rel="noopener"><img src="w/ucdlc-1.png" width="693" height="800" data-show="293" data-phone="46vw" alt="The CLCD face with the lab name running up its side"></a><a href="w/ucdlc-2.png" target="_blank" rel="noopener"><img src="w/ucdlc-2.png" width="693" height="800" data-show="293" data-phone="46vw" alt="The CLCD face above the lab name"></a></div><div class="row" style="--cols:0.866fr 0.741fr;--g:1.607;--b:10px"><a href="w/ucdlc-3.png" target="_blank" rel="noopener"><img src="w/ucdlc-3.png" width="693" height="800" data-show="293" data-phone="50vw" alt="The VR headset version of the logo, in white"></a><a href="w/ucdlc-9.png" target="_blank" rel="noopener"><img src="w/ucdlc-9.png" width="593" height="800" data-show="251" data-phone="42vw" alt="The ways the logo and name can be arranged"></a></div></div>
+    </div>
+  </div>
+
+  <div class="item p c6 gal misc">
+    <h3>Misc</h3>
+    <div class="set">
+      <div class="row wrap"><div class="row" style="--cols:0.707fr 0.707fr;--g:1.414;--b:10px"><a href="w/adclub-5.jpg" target="_blank" rel="noopener"><img src="w/adclub-5.jpg" width="707" height="1000" data-show="345" data-phone="46vw" alt="The Chitra Kala 3.0 art competition poster"></a><a href="w/acm-1.jpg" target="_blank" rel="noopener"><img src="w/acm-1.jpg" width="595" height="842" data-show="345" data-phone="46vw" alt="A Prodigy '22 poster"></a></div><div class="block" style="--rows:0.291fr 0.311fr 0.437fr;--g:0.962;--b:0px"><div class="row" style="--cols:3.435fr"><a href="w/logo-10.png" target="_blank" rel="noopener"><img src="w/logo-10.png" width="474" height="138" data-show="450" data-phone="92vw" alt="The Apartment wordmark"></a></div><div class="row" style="--cols:1.564fr 1.649fr"><a href="w/logo-12.png" target="_blank" rel="noopener"><img src="w/logo-12.png" width="258" height="165" data-show="214" data-phone="45vw" alt="A logo drawn in thick black outline"></a><a href="w/logo-13.png" target="_blank" rel="noopener"><img src="w/logo-13.png" width="282" height="171" data-show="226" data-phone="47vw" alt="A bow tie logo"></a></div><div class="row" style="--cols:1.000fr 1.289fr"><a href="w/logo-9.png" target="_blank" rel="noopener"><img src="w/logo-9.png" width="200" height="200" data-show="192" data-phone="40vw" alt="The dsgn corp. logo"></a><a href="w/logo-16.png" target="_blank" rel="noopener"><img src="w/logo-16.png" width="1219" height="946" data-show="248" data-phone="52vw" alt="An SK monogram in blue"></a></div></div></div>
+      <div class="row wrap"><div class="row" style="--cols:0.780fr 0.780fr 1.091fr;--g:2.650;--b:20px"><a href="w/logo-1.png" target="_blank" rel="noopener"><img src="w/logo-1.png" width="145" height="186" data-show="139" data-phone="27vw" alt="The avani jar logo"></a><a href="w/logo-2.png" target="_blank" rel="noopener"><img src="w/logo-2.png" width="145" height="186" data-show="139" data-phone="27vw" alt="The avani jar with a seedling"></a><div class="stack"><a href="w/logo-3.png" target="_blank" rel="noopener"><img src="w/logo-3.png" width="227" height="104" data-show="195" data-phone="38vw" alt="The avani wordmark on black"></a><a href="w/logo-4.png" target="_blank" rel="noopener"><img src="w/logo-4.png" width="227" height="104" data-show="195" data-phone="38vw" alt="The avani wordmark, stitched, on brown"></a></div></div><div class="row" style="--cols:1.459fr 1.027fr 1.046fr;--g:3.531;--b:20px"><a href="w/logo-6.png" target="_blank" rel="noopener"><img src="w/logo-6.png" width="318" height="218" data-show="263" data-phone="38vw" alt="The Ghosh logo on black"></a><a href="w/logo-7.png" target="_blank" rel="noopener"><img src="w/logo-7.png" width="271" height="264" data-show="185" data-phone="27vw" alt="The Ghosh mark on red"></a><a href="w/logo-8.png" target="_blank" rel="noopener"><img src="w/logo-8.png" width="272" height="260" data-show="189" data-phone="27vw" alt="The Ghosh mark in outline"></a></div></div>
+      <div class="row wrap"><div class="row" style="--cols:0.954fr 0.845fr 1.061fr;--g:2.860;--b:20px"><a href="w/logo-11.png" target="_blank" rel="noopener"><img src="w/logo-11.png" width="124" height="130" data-show="144" data-phone="31vw" alt="A yellow smiling logo with a star"></a><a href="w/logo-15.png" target="_blank" rel="noopener"><img src="w/logo-15.png" width="120" height="142" data-show="128" data-phone="27vw" alt="A cropped RS logo"></a><a href="w/adclub-1.png" target="_blank" rel="noopener"><img src="w/adclub-1.png" width="628" height="592" data-show="160" data-phone="34vw" alt="The Art &amp; Design Club monogram"></a></div><div class="row" style="--cols:1.292fr 1.797fr 1.334fr;--g:4.424;--b:20px"><a href="w/adclub-2.png" target="_blank" rel="noopener"><img src="w/adclub-2.png" width="358" height="277" data-show="198" data-phone="27vw" alt="An Art &amp; Design Club wordmark"></a><a href="w/adclub-3.png" target="_blank" rel="noopener"><img src="w/adclub-3.png" width="478" height="266" data-show="276" data-phone="37vw" alt="An Art &amp; Design wordmark with flowers"></a><a href="w/adclub-4.png" target="_blank" rel="noopener"><img src="w/adclub-4.png" width="435" height="326" data-show="205" data-phone="28vw" alt="A serif art/design/club wordmark"></a></div></div>
+    </div>
+  </div>
+
+
+  <section class="lb" id="writing">
+  <h2 class="title">Writing</h2>
+  <div class="reviews"></div>
+  </section>
+
+  <section class="lb end">
+  <img class="seal" src="w/flame.png" width="156" height="271" alt="A flame emblem" loading="lazy">
+  <footer class="m">© 2026 Edvin Joseph<br><span class="credit">3D Mac: <a href="https://sketchfab.com/3d-models/macintosh-classic-1991-3b66e98d137d4a23aaa725ce0a8aec28" target="_blank" rel="noopener">Macintosh Classic (1991)</a> by <a href="https://sketchfab.com/doneil" target="_blank" rel="noopener">Daniel O'Neil</a>, <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</span></footer>
+  </section>
+</main>
+
+<script type="module">
+const box = document.querySelector('.mac3d');
+
+// the 3D library and the model load straight after the page, so the Mac is ready before anyone reaches it
+if (document.readyState !== 'complete') await new Promise(ok => addEventListener('load', ok, { once: true }));
+const [THREE, { GLTFLoader }, { RoomEnvironment }] = await Promise.all([
+  import('https://cdn.jsdelivr.net/npm/three@0.160.0/+esm'),
+  import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js/+esm'),
+  import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/environments/RoomEnvironment.js/+esm'),
+]);
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+// render above the screen's own density (up to 3x) so the small text on the Mac's screen stays crisp
+const density = () => Math.min(Math.max(devicePixelRatio, 1) * 1.5, 3);
+renderer.setPixelRatio(density());
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+box.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+const sun = new THREE.DirectionalLight(0xffffff, 1.2); sun.position.set(4, 10, 8); scene.add(sun);
+
+const camera = new THREE.PerspectiveCamera(28, 4 / 3, 0.1, 200);
+const rig = new THREE.Group(); scene.add(rig);
+
+// soft contact shadow under the machine
+const sh = document.createElement('canvas'); sh.width = sh.height = 128;
+const g = sh.getContext('2d'), grad = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+grad.addColorStop(0, 'rgba(0,0,0,.45)'); grad.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = grad; g.fillRect(0, 0, 128, 128);
+const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sh), transparent: true, depthWrite: false }));
+shadow.rotation.x = -Math.PI / 2; rig.add(shadow);
+
+const img = src => new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = src; });
+const [gltf, skin, photo] = await Promise.all([
+  // the model ships as base64 GLB inside JSON: one same-origin fetch, no data: or blob: URLs
+  fetch(box.dataset.model).then(r => r.json()).then(j => new GLTFLoader().parseAsync(Uint8Array.from(atob(j.glb), c => c.charCodeAt(0)).buffer, '')),
+  img(box.dataset.skin), img(box.dataset.screen),
+]);
+
+const tex = (src, flip) => { const t = new THREE.Texture(src); t.flipY = flip; t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = renderer.capabilities.getMaxAnisotropy(); t.needsUpdate = true; return t; };
+
+// the screen gets its own sharp, unlit layer: the case texture only spares it about 460 px
+const U0 = 186 / 4096, U1 = 1116 / 4096, V0 = 1392 / 4096, V1 = 2084 / 4096;   // where the screen sits in the case texture
+const SW = 2048, SH = Math.round(SW * (V1 - V0) / (U1 - U0));
+const cv = document.createElement('canvas'); cv.width = SW; cv.height = SH;
+const x = cv.getContext('2d');
+const fit = Math.max(SW / photo.naturalWidth, SH / photo.naturalHeight), pw = photo.naturalWidth * fit, ph = photo.naturalHeight * fit;
+x.imageSmoothingQuality = 'high';
+x.drawImage(photo, 0, (SH - ph) / 2, pw, ph);                                   // fill the 4:3 tube: the left edge stays, the empty right side is trimmed
+// the trim cuts through the status bar's "Tab Size: 4": cover it in the bar's own blue (screenshot px 1466-1800, 1094-1121)
+x.fillStyle = 'rgb(33,86,214)'; x.fillRect(1466 * fit, (SH - ph) / 2 + 1094 * fit, (1800 - 1466) * fit, 27 * fit);
+
+const mac = gltf.scene;
+let body;
+// the case texture still has the old screen, with a dark rim, under the new one: paint the screenshot there too
+const case2 = document.createElement('canvas'); case2.width = case2.height = 2048;
+{
+  const c = case2.getContext('2d'), sx = U0 * 2048, sy = V0 * 2048, sw = (U1 - U0) * 2048, sh3 = (V1 - V0) * 2048, f = sh3 / SH;
+  c.drawImage(skin, 0, 0, 2048, 2048);
+  c.save(); c.translate(sx, sy + sh3); c.scale(1, -1);                          // the screen sits upside down in the case texture
+  c.fillStyle = '#e8e6e0'; c.fillRect(-4, -4, sw + 8, sh3 + 8);
+  c.drawImage(cv, 0, 0, SW * f, SH * f); c.restore();
+}
+mac.traverse(o => { if (o.isMesh) { body = o; o.material = new THREE.MeshStandardMaterial({ map: tex(case2, false), roughness: 0.85, side: THREE.DoubleSide }); } });
+{ // find the screen's corners in the model, then rebuild it as a bulging CRT face carrying the screenshot
+  const g = body.geometry, pos = g.attributes.position, uv = g.attributes.uv, e = 1e-3, C = {};
+  for (let i = 0; i < uv.count; i++) {
+    const u = (uv.getX(i) - U0) / (U1 - U0), v = (uv.getY(i) - V0) / (V1 - V0);
+    if (Math.abs(u - Math.round(u)) < e && Math.abs(v - Math.round(v)) < e) C[Math.round(u) + '' + Math.round(v)] = new THREE.Vector3().fromBufferAttribute(pos, i);
+  }
+  // the screen is upside down in the case texture, so with the screenshot texture flipped, t runs the same way as v
+  const at = (s, t) => C['00'].clone().multiplyScalar((1 - s) * (1 - t)).add(C['10'].clone().multiplyScalar(s * (1 - t)))
+    .add(C['01'].clone().multiplyScalar((1 - s) * t)).add(C['11'].clone().multiplyScalar(s * t));
+  const mid = at(.5, .5), out = new THREE.Vector3().subVectors(C['10'], C['00']).cross(new THREE.Vector3().subVectors(C['01'], C['00'])).normalize();
+  g.computeBoundingBox(); if (out.dot(mid.clone().sub(g.boundingBox.getCenter(new THREE.Vector3()))) < 0) out.negate();
+  const bulge = C['00'].distanceTo(C['10']) * 0.045, N = 32, P = [], Q = [], I = [];
+  for (let j = 0; j <= N; j++) for (let i = 0; i <= N; i++) {
+    const s2 = i / N, t2 = j / N, a2 = s2 * 2 - 1, b2 = t2 * 2 - 1;
+    const p2 = at(s2, t2).addScaledVector(out, bulge * (1 - a2 * a2) * (1 - b2 * b2));   // flat at the edges, so no gap opens round it
+    P.push(p2.x, p2.y, p2.z); Q.push(s2, t2);
+  }
+  for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) { const k2 = j * (N + 1) + i; I.push(k2, k2 + 1, k2 + N + 1, k2 + 1, k2 + N + 2, k2 + N + 1); }
+  const sg = new THREE.BufferGeometry();
+  sg.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); sg.setAttribute('uv', new THREE.Float32BufferAttribute(Q, 2)); sg.setIndex(I);
+  body.add(new THREE.Mesh(sg, new THREE.MeshBasicMaterial({ map: tex(cv, true), toneMapped: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -4 })));
+}
+rig.add(mac);
+
+// frame it: centred, seen from the front and a little above
+const b = new THREE.Box3().setFromObject(mac), c = b.getCenter(new THREE.Vector3()), size = b.getSize(new THREE.Vector3());
+mac.position.sub(c);
+shadow.scale.set(size.x * 1.35, size.z * 1.35, 1); shadow.position.y = -size.y / 2 - 0.002;
+const dist = size.y * 2.8;
+camera.position.set(0, dist * 0.2, dist);
+camera.lookAt(0, -size.y * 0.04, 0);
+
+function resize() {
+  const w = renderer.domElement.clientWidth, h = renderer.domElement.clientHeight;
+  renderer.setPixelRatio(density());                      // browser zoom changes the density
+  renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+  requestAnimationFrame(() => wake());                    // resizing clears the canvas
+}
+resize(); new ResizeObserver(resize).observe(box); addEventListener('resize', resize);
+
+// drag to turn it round; it keeps a little spin when let go. A tap without a drag opens the screenshot.
+const REST = box.closest(".flip") ? 0.3 : -0.3;        // turned a little so the side shows
+const LEVEL = -0.18;                                     // tipped back to meet the camera's height: seen at eye level, top hidden
+let yaw = REST, pitch = LEVEL, vy = 0, drag = null, moved = false, visible = true;
+box.addEventListener('pointerdown', e => {
+  if (e.button !== 0) return;
+  drag = { x: e.clientX, y: e.clientY, yaw, pitch, t: performance.now(), lx: e.clientX }; moved = false; vy = 0;
+  box.setPointerCapture(e.pointerId); box.classList.add('dragging'); wake();
+});
+box.addEventListener('pointermove', e => {
+  if (!drag) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+  const turn = 6 / box.clientWidth;                       // a full-width drag is about one turn
+  yaw = drag.yaw + dx * turn;
+  pitch = Math.max(-0.35, Math.min(0.35, drag.pitch + dy * turn * 0.5));
+  const now = performance.now(); vy = (e.clientX - drag.lx) * turn / Math.max(1, now - drag.t) * 16; drag.t = now; drag.lx = e.clientX;
+  wake();
+});
+const release = () => { if (!drag) return; drag = null; box.classList.remove('dragging'); wake(); };
+box.addEventListener('pointerup', release);
+box.addEventListener('pointercancel', () => { release(); moved = true; vy = 0; });
+box.addEventListener('click', e => {
+  e.preventDefault();
+  if (!moved && box.classList.contains('ready')) window.open(box.dataset.screen, '_blank', 'noopener');
+});
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) requestAnimationFrame(() => wake()); }).observe(box);
+
+let ry = yaw, rx = pitch, ticking = false;
+function tick() {
+  if (!drag) { yaw += vy; vy *= calm ? 0 : 0.94; pitch += (LEVEL - pitch) * 0.08; }
+  ry += (yaw - ry) * 0.25; rx += (pitch - rx) * 0.25;
+  mac.rotation.set(0, 0, 0); rig.rotation.set(rx, ry, 0);
+  renderer.render(scene, camera);
+  const still = !drag && Math.abs(vy) < 1e-4 && Math.abs(yaw - ry) < 1e-4 && Math.abs(pitch - rx) < 1e-4 && Math.abs(LEVEL - pitch) < 1e-4;
+  ticking = !still && visible;
+  if (ticking) requestAnimationFrame(tick);
+}
+function wake() { if (!ticking) { ticking = true; requestAnimationFrame(tick); } }
+wake();
+box.classList.add('ready');
+</script>
+<script>
+addEventListener('load', function () {
+  var left = Array.from(document.images);
+  (function next() { var i = left.shift(); if (i) i.decode().catch(function () {}).then(next); })();
+});
+
+document.querySelectorAll('video[data-play]').forEach(function (v) {
+  v.muted = true;
+  new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) v.play().catch(function () {}); else v.pause(); }); }, { threshold: 0.25 }).observe(v);
+});
+
+// India HCI: the toggle drawn in the site's nav bar really switches it, and the Safari toolbar follows
+document.querySelectorAll('.hci .toggle').forEach(function (t) {
+  t.addEventListener('click', function () {
+    var w = t.closest('.browser');
+    w.dataset.shown = w.dataset.shown === 'dark' ? 'light' : 'dark';
+  });
+});
+
+// mockup strips: drag with a mouse and they move like a Mac trackpad. The strip tracks the cursor 1:1, keeps its speed
+// when let go and eases to a stop, and past either end it resists and springs back. Touch scrolls by itself;
+// a click without a drag still opens the screen
+document.querySelectorAll('.item.p.wide > .strip').forEach(function (s) {
+  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var start = null, moved = false, pos = 0, vel = 0, raf = 0, queued = 0, prev = 0, trail = [];
+  function max() { return s.scrollWidth - s.clientWidth; }
+  function fit() { s.classList.toggle('grab', s.scrollWidth > s.clientWidth); }
+  fit(); new ResizeObserver(fit).observe(s); s.addEventListener('pointerenter', fit);
+
+  function paint() {
+    var m = max(), over = pos < 0 ? pos : pos > m ? pos - m : 0, d = s.clientWidth;
+    var pull = over ? -Math.sign(over) * (1 - 1 / (Math.abs(over) * .55 / d + 1)) * d : 0;   // the further past, the harder it pulls
+    var want = pos - over;
+    s.scrollLeft = want;
+    var shift = pull - (want - s.scrollLeft);    // scrollLeft may round to whole pixels: carry the fraction in a transform
+    s.style.setProperty('--pull', shift.toFixed(2) + 'px');
+  }
+  function glide(t) {
+    var dt = Math.min(32, t - prev), m = max(), edge = pos < 0 ? 0 : pos > m ? m : null;
+    prev = t;
+    if (edge === null) { pos += vel * dt; vel *= Math.pow(.9968, dt); }
+    else { vel *= Math.pow(.97, dt); pos += vel * dt; pos += (edge - pos) * (1 - Math.pow(.988, dt)); }
+    if (Math.abs(vel) > .012 || (edge !== null && Math.abs(pos - edge) > .3)) { paint(); raf = requestAnimationFrame(glide); return; }
+    if (edge !== null) pos = edge;
+    vel = 0; raf = 0; paint(); s.style.removeProperty('--pull');
+  }
+  function halt() { cancelAnimationFrame(raf); raf = 0; vel = 0; pos = Math.max(0, Math.min(max(), pos)); }
+
+  s.addEventListener('pointerdown', function (e) {
+    moved = false;
+    if (e.pointerType !== 'mouse' || e.button !== 0 || !s.classList.contains('grab')) return;
+    if (e.clientY > s.getBoundingClientRect().top + s.clientHeight) return;   // that's the scrollbar
+    if (raf) halt(); else pos = s.scrollLeft;                                 // a press catches a moving strip
+    start = { x: e.clientX, pos: pos }; trail = [];
+  });
+  s.addEventListener('pointermove', function (e) {
+    if (!start) return;
+    if (!moved) {
+      if (Math.abs(e.clientX - start.x) < 5) return;
+      moved = true; start.x = e.clientX; s.setPointerCapture(e.pointerId); s.classList.add('dragging');
+    }
+    pos = start.pos - (e.clientX - start.x);
+    trail.push({ t: e.timeStamp, x: e.clientX });
+    while (trail.length > 2 && e.timeStamp - trail[0].t > 90) trail.shift();
+    if (!queued) queued = requestAnimationFrame(function () { queued = 0; paint(); });
+  });
+  function end(e) {
+    if (!start) return;
+    start = null; s.classList.remove('dragging');
+    if (!moved) return;
+    var a = trail[0], b = trail[trail.length - 1];
+    vel = a && b && b.t > a.t && e.timeStamp - b.t < 60 ? (a.x - b.x) / (b.t - a.t) : 0;    // a held pause means no flick
+    vel = calm ? 0 : Math.max(-5, Math.min(5, vel));
+    prev = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(glide);
+  }
+  s.addEventListener('pointerup', end);
+  s.addEventListener('pointercancel', function (e) { end(e); moved = true; });
+  s.addEventListener('wheel', function () { if (raf) { halt(); paint(); s.style.removeProperty('--pull'); } }, { passive: true });
+  s.addEventListener('dragstart', function (e) { e.preventDefault(); });      // no ghost image of the screenshot
+  s.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+});
+</script>
+</html>

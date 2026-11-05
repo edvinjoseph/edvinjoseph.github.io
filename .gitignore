@@ -1,0 +1,6 @@
+# Working files, not part of the site
+img/
+.claude/
+.taste-skill/
+skills-lock.json
+__pycache__/
