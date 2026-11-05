@@ -87,7 +87,6 @@ footer { margin-top: 24px; }
 .c2 { --c: #b03a2e; --on: #ffffff; }
 .c3 { --c: #2f5b86; --on: #ffffff; }
 .c4 { --c: #8a4b22; --on: #ffffff; }
-.c5 { --c: #efd9d6; --on: #134754; }   /* the pale pink and teal of Phi's own palette */
 .c6 { --c: #d8d3c9; --on: #1a1a1a; }   /* a gallery wall: both the black and the white logos stand out on it */
 html, body { overflow-x: clip; }
 /* colour blocks run to the window edges while their text stays on the column */
@@ -132,7 +131,8 @@ html, body { overflow-x: clip; }
 .mac3d canvas { position: absolute; left: -10%; top: -12%; width: 120%; height: 124%; display: block; pointer-events: none; opacity: 0; transition: opacity .5s; }
 .mac3d.ready canvas { opacity: 1; }
 .mac3d { touch-action: pan-y; }
-.mac3d .mac-flat { position: absolute; inset: 12% 0 auto; display: block; transition: opacity .4s; }
+.mac3d .mac-flat { position: absolute; inset: 12% 0 auto; display: block; opacity: 0; pointer-events: none; transition: opacity .4s; }
+.mac3d.failed .mac-flat { opacity: 1; pointer-events: auto; }
 .mac3d .mac-flat img { display: block; width: 100%; height: auto; border-radius: 6px; }
 .mac3d.ready .mac-flat { opacity: 0; pointer-events: none; }
 
@@ -287,7 +287,7 @@ html, body { overflow-x: clip; }
   .lap .sheet { width: 560px; }   /* the page stays readable, and people pan around it */
 }
 
-/* Phi, UCLCD and Misc: justified rows, where every picture in a row is the same height and every row ends on the same edge */
+/* Misc: justified rows, where every picture in a row is the same height and every row ends on the same edge */
 .item.p.gal { display: block; padding: 28px calc(50vw - 50%) 40px; }
 .item.p.gal > p { max-width: 62ch; }
 .gal .set { display: grid; gap: 10px; width: min(100vw - 2 * var(--edge), 1160px); margin: 8px 0 0 50%; transform: translateX(-50%); }
@@ -300,6 +300,7 @@ html, body { overflow-x: clip; }
 .gal .set a { display: block; min-width: 0; min-height: 0; }
 .gal .set img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .misc .set { margin-top: 16px; }
+.misc > h3 { font-style: italic; }
 @media (max-width: 860px) {
   .gal .row.wrap { flex-direction: column; }
   .gal .row.wrap > .row, .gal .row.wrap > .block { flex: none; }
@@ -342,6 +343,7 @@ html, body { overflow-x: clip; }
 .gate { display: block; width: 186px; max-width: 100%; height: auto; margin-bottom: 28px; }
 .opening > h2:last-child { margin-bottom: 0; }
 </style>
+<noscript><style>.mac3d .mac-flat { opacity: 1; pointer-events: auto; }</style></noscript>
 
 <main>
   <div class="opening">
@@ -486,30 +488,11 @@ html, body { overflow-x: clip; }
     </div>
   </div>
 
-  <div class="item p c5 phi gal">
-    <h3>Phi</h3>
-    <p>A logo for a client. It started as a pencil sketch and ended as a mark in six weights and five colours.</p>
-    <div class="set">
-      <div class="row wrap"><div class="row" style="--cols:1.000fr 3.095fr;--g:4.095;--b:10px"><a href="w/phi-1.jpg" target="_blank" rel="noopener"><img src="w/phi-1.jpg" width="700" height="700" data-show="135" data-phone="22vw" alt="The pencil sketch the Phi logo started from"></a><a href="w/phi-8.png" target="_blank" rel="noopener"><img src="w/phi-8.png" width="1600" height="517" data-show="416" data-phone="70vw" alt="The Phi logo in six weights"></a></div><div class="row" style="--cols:2.150fr 2.150fr;--g:4.300;--b:10px"><a href="w/phi-3.png" target="_blank" rel="noopener"><img src="w/phi-3.png" width="1505" height="700" data-show="290" data-phone="46vw" alt="The Phi logo in white on black"></a><a href="w/phi-4.png" target="_blank" rel="noopener"><img src="w/phi-4.png" width="1505" height="700" data-show="290" data-phone="46vw" alt="The Phi logo in black on white"></a></div></div>
-      <div class="row wrap"><div class="row" style="--cols:2.150fr 2.150fr;--g:4.300;--b:10px"><a href="w/phi-2.png" target="_blank" rel="noopener"><img src="w/phi-2.png" width="1505" height="700" data-show="282" data-phone="46vw" alt="The Phi logo in pale pink on deep teal"></a><a href="w/phi-5.png" target="_blank" rel="noopener"><img src="w/phi-5.png" width="1505" height="700" data-show="282" data-phone="46vw" alt="The Phi logo in green"></a></div><div class="row" style="--cols:2.150fr 2.150fr;--g:4.300;--b:10px"><a href="w/phi-6.png" target="_blank" rel="noopener"><img src="w/phi-6.png" width="1505" height="700" data-show="282" data-phone="46vw" alt="The Phi logo in blue"></a><a href="w/phi-7.png" target="_blank" rel="noopener"><img src="w/phi-7.png" width="1505" height="700" data-show="282" data-phone="46vw" alt="The Phi logo in black on red"></a></div></div>
-    </div>
-  </div>
-
-  <div class="item p c3 gal">
-    <h3>UCLCD</h3>
-    <p>A logo for the Users Cognitive Load Centric Design Lab, a research lab at UPES. The letters sit above a smile, so the mark reads as a face. A second version swaps the smile for a VR headset, for the lab's VR work.</p>
-    <div class="set">
-      <div class="row wrap"><div class="row" style="--cols:1.757fr 1.872fr;--g:3.628;--b:10px"><a href="w/ucdlc-5.png" target="_blank" rel="noopener"><img src="w/ucdlc-5.png" width="1400" height="797" data-show="357" data-phone="45vw" alt="The UCLCD wordmark, with the L sitting above a smile"></a><a href="w/ucdlc-6.png" target="_blank" rel="noopener"><img src="w/ucdlc-6.png" width="1400" height="748" data-show="380" data-phone="47vw" alt="The wordmark drawn as a face with its eyes open"></a></div><div class="row" style="--cols:1.093fr 0.866fr;--g:1.959;--b:10px"><a href="w/ucdlc-4.png" target="_blank" rel="noopener"><img src="w/ucdlc-4.png" width="778" height="712" data-show="219" data-phone="51vw" alt="The VR headset version of the logo, in black"></a><a href="w/ucdlc-1.png" target="_blank" rel="noopener"><img src="w/ucdlc-1.png" width="693" height="800" data-show="174" data-phone="41vw" alt="The CLCD face with the lab name running up its side"></a></div></div>
-      <div class="row wrap"><div class="row" style="--cols:3.248fr;--g:3.248;--b:0px"><a href="w/ucdlc-7.png" target="_blank" rel="noopener"><img src="w/ucdlc-7.png" width="1400" height="431" data-show="653" data-phone="92vw" alt="Three versions of the CLCD face"></a></div><div class="row" style="--cols:0.866fr 0.866fr 0.741fr;--g:2.474;--b:20px"><a href="w/ucdlc-2.png" target="_blank" rel="noopener"><img src="w/ucdlc-2.png" width="693" height="800" data-show="167" data-phone="32vw" alt="The CLCD face above the lab name"></a><a href="w/ucdlc-3.png" target="_blank" rel="noopener"><img src="w/ucdlc-3.png" width="693" height="800" data-show="167" data-phone="32vw" alt="The VR headset version of the logo, in white"></a><a href="w/ucdlc-9.png" target="_blank" rel="noopener"><img src="w/ucdlc-9.png" width="593" height="800" data-show="143" data-phone="28vw" alt="The ways the logo and name can be arranged"></a></div></div>
-    </div>
-  </div>
-
   <div class="item p c6 gal misc">
     <h3>Misc</h3>
     <div class="set">
-      <div class="row wrap"><div class="row" style="--cols:0.707fr 0.707fr;--g:1.414;--b:10px"><a href="w/adclub-5.jpg" target="_blank" rel="noopener"><img src="w/adclub-5.jpg" width="707" height="1000" data-show="345" data-phone="46vw" alt="The Chitra Kala 3.0 art competition poster"></a><a href="w/acm-1.jpg" target="_blank" rel="noopener"><img src="w/acm-1.jpg" width="595" height="842" data-show="345" data-phone="46vw" alt="A Prodigy '22 poster"></a></div><div class="block" style="--rows:0.291fr 0.311fr 0.437fr;--g:0.962;--b:0px"><div class="row" style="--cols:3.435fr"><a href="w/logo-10.png" target="_blank" rel="noopener"><img src="w/logo-10.png" width="474" height="138" data-show="450" data-phone="92vw" alt="The Apartment wordmark"></a></div><div class="row" style="--cols:1.564fr 1.649fr"><a href="w/logo-12.png" target="_blank" rel="noopener"><img src="w/logo-12.png" width="258" height="165" data-show="214" data-phone="45vw" alt="A logo drawn in thick black outline"></a><a href="w/logo-13.png" target="_blank" rel="noopener"><img src="w/logo-13.png" width="282" height="171" data-show="226" data-phone="47vw" alt="A bow tie logo"></a></div><div class="row" style="--cols:1.000fr 1.289fr"><a href="w/logo-9.png" target="_blank" rel="noopener"><img src="w/logo-9.png" width="200" height="200" data-show="192" data-phone="40vw" alt="The dsgn corp. logo"></a><a href="w/logo-16.png" target="_blank" rel="noopener"><img src="w/logo-16.png" width="1219" height="946" data-show="248" data-phone="52vw" alt="An SK monogram in blue"></a></div></div></div>
-      <div class="row wrap"><div class="row" style="--cols:0.780fr 0.780fr 1.091fr;--g:2.650;--b:20px"><a href="w/logo-1.png" target="_blank" rel="noopener"><img src="w/logo-1.png" width="145" height="186" data-show="139" data-phone="27vw" alt="The avani jar logo"></a><a href="w/logo-2.png" target="_blank" rel="noopener"><img src="w/logo-2.png" width="145" height="186" data-show="139" data-phone="27vw" alt="The avani jar with a seedling"></a><div class="stack"><a href="w/logo-3.png" target="_blank" rel="noopener"><img src="w/logo-3.png" width="227" height="104" data-show="195" data-phone="38vw" alt="The avani wordmark on black"></a><a href="w/logo-4.png" target="_blank" rel="noopener"><img src="w/logo-4.png" width="227" height="104" data-show="195" data-phone="38vw" alt="The avani wordmark, stitched, on brown"></a></div></div><div class="row" style="--cols:1.459fr 1.027fr 1.046fr;--g:3.531;--b:20px"><a href="w/logo-6.png" target="_blank" rel="noopener"><img src="w/logo-6.png" width="318" height="218" data-show="263" data-phone="38vw" alt="The Ghosh logo on black"></a><a href="w/logo-7.png" target="_blank" rel="noopener"><img src="w/logo-7.png" width="271" height="264" data-show="185" data-phone="27vw" alt="The Ghosh mark on red"></a><a href="w/logo-8.png" target="_blank" rel="noopener"><img src="w/logo-8.png" width="272" height="260" data-show="189" data-phone="27vw" alt="The Ghosh mark in outline"></a></div></div>
-      <div class="row wrap"><div class="row" style="--cols:0.954fr 0.845fr 1.061fr;--g:2.860;--b:20px"><a href="w/logo-11.png" target="_blank" rel="noopener"><img src="w/logo-11.png" width="124" height="130" data-show="144" data-phone="31vw" alt="A yellow smiling logo with a star"></a><a href="w/logo-15.png" target="_blank" rel="noopener"><img src="w/logo-15.png" width="120" height="142" data-show="128" data-phone="27vw" alt="A cropped RS logo"></a><a href="w/adclub-1.png" target="_blank" rel="noopener"><img src="w/adclub-1.png" width="628" height="592" data-show="160" data-phone="34vw" alt="The Art &amp; Design Club monogram"></a></div><div class="row" style="--cols:1.292fr 1.797fr 1.334fr;--g:4.424;--b:20px"><a href="w/adclub-2.png" target="_blank" rel="noopener"><img src="w/adclub-2.png" width="358" height="277" data-show="198" data-phone="27vw" alt="An Art &amp; Design Club wordmark"></a><a href="w/adclub-3.png" target="_blank" rel="noopener"><img src="w/adclub-3.png" width="478" height="266" data-show="276" data-phone="37vw" alt="An Art &amp; Design wordmark with flowers"></a><a href="w/adclub-4.png" target="_blank" rel="noopener"><img src="w/adclub-4.png" width="435" height="326" data-show="205" data-phone="28vw" alt="A serif art/design/club wordmark"></a></div></div>
+      <div class="row wrap"><div class="row" style="--cols:0.707fr 0.707fr;--g:1.414;--b:10px"><a href="w/adclub-5.jpg" target="_blank" rel="noopener"><img src="w/adclub-5.jpg" width="707" height="1000" data-show="204" data-phone="46vw" alt="The Chitra Kala 3.0 art competition poster"></a><a href="w/acm-1.jpg" target="_blank" rel="noopener"><img src="w/acm-1.jpg" width="595" height="842" data-show="204" data-phone="46vw" alt="A Prodigy '22 poster"></a></div><div class="block" style="--rows:86.4fr 91.9fr 90.0fr;--g:2.558;--b:0px"><div class="row wrap"><div class="row" style="--cols:0.780fr 0.780fr 2.203fr;--g:3.762;--b:20px"><a href="w/logo-1.png" target="_blank" rel="noopener"><img src="w/logo-1.png" width="290" height="372" data-show="67" data-phone="19vw" alt="The avani jar logo"></a><a href="w/logo-2.png" target="_blank" rel="noopener"><img src="w/logo-2.png" width="290" height="372" data-show="67" data-phone="19vw" alt="The avani jar with a seedling"></a><a href="w/logo-3.png" target="_blank" rel="noopener"><img src="w/logo-3.png" width="456" height="207" data-show="190" data-phone="54vw" alt="The avani wordmark on black"></a></div><div class="row" style="--cols:1.027fr 1.046fr 1.000fr 0.954fr;--g:4.027;--b:30px"><a href="w/logo-7.png" target="_blank" rel="noopener"><img src="w/logo-7.png" width="271" height="264" data-show="89" data-phone="23vw" alt="The Ghosh mark on red"></a><a href="w/logo-8.png" target="_blank" rel="noopener"><img src="w/logo-8.png" width="272" height="260" data-show="90" data-phone="24vw" alt="The Ghosh mark in outline"></a><a href="w/phi-1.jpg" target="_blank" rel="noopener"><img src="w/phi-1.jpg" width="700" height="700" data-show="86" data-phone="23vw" alt="The pencil sketch the Phi logo started from"></a><a href="w/logo-11.png" target="_blank" rel="noopener"><img src="w/logo-11.png" width="124" height="130" data-show="82" data-phone="22vw" alt="A yellow smiling logo with a star"></a></div></div><div class="row wrap"><div class="row" style="--cols:3.435fr;--g:3.435;--b:0px"><a href="w/logo-10.png" target="_blank" rel="noopener"><img src="w/logo-10.png" width="474" height="138" data-show="316" data-phone="92vw" alt="The Apartment wordmark"></a></div><div class="row" style="--cols:1.564fr 1.649fr 1.000fr;--g:4.213;--b:20px"><a href="w/logo-12.png" target="_blank" rel="noopener"><img src="w/logo-12.png" width="258" height="165" data-show="144" data-phone="34vw" alt="A logo drawn in thick black outline"></a><a href="w/logo-13.png" target="_blank" rel="noopener"><img src="w/logo-13.png" width="282" height="171" data-show="152" data-phone="36vw" alt="A bow tie logo"></a><a href="w/logo-9.png" target="_blank" rel="noopener"><img src="w/logo-9.png" width="200" height="200" data-show="92" data-phone="22vw" alt="The dsgn corp. logo"></a></div></div><div class="row wrap"><div class="row" style="--cols:2.150fr 1.500fr;--g:3.650;--b:10px"><a href="w/phi-2.png" target="_blank" rel="noopener"><img src="w/phi-2.png" width="1505" height="700" data-show="193" data-phone="54vw" alt="The Phi logo in three weights, pale pink on deep teal"></a><a href="w/talent.gif" target="_blank" rel="noopener"><img src="w/talent.gif" width="420" height="280" alt="The Talent Dealz logo animating in"></a></div><div class="row" style="--cols:1.289fr 0.845fr 1.061fr 0.741fr;--g:3.936;--b:30px"><a href="w/logo-16.png" target="_blank" rel="noopener"><img src="w/logo-16.png" width="1219" height="946" data-show="116" data-phone="30vw" alt="An SK monogram in blue"></a><a href="w/logo-15.png" target="_blank" rel="noopener"><img src="w/logo-15.png" width="120" height="142" data-show="76" data-phone="20vw" alt="A cropped RS logo"></a><a href="w/adclub-1.png" target="_blank" rel="noopener"><img src="w/adclub-1.png" width="628" height="592" data-show="95" data-phone="25vw" alt="The Art &amp; Design Club monogram"></a><a href="w/ucdlc-9.png" target="_blank" rel="noopener"><img src="w/ucdlc-9.png" width="593" height="800" data-show="67" data-phone="17vw" alt="The ways the UCLCD logo and name can be arranged"></a></div></div></div></div>
+      <div class="row wrap"><div class="row" style="--cols:1.292fr 1.797fr 1.334fr 1.757fr;--g:6.180;--b:30px"><a href="w/adclub-2.png" target="_blank" rel="noopener"><img src="w/adclub-2.png" width="358" height="277" data-show="117" data-phone="19vw" alt="An Art &amp; Design Club wordmark"></a><a href="w/adclub-3.png" target="_blank" rel="noopener"><img src="w/adclub-3.png" width="478" height="266" data-show="162" data-phone="27vw" alt="An Art &amp; Design wordmark with flowers"></a><a href="w/adclub-4.png" target="_blank" rel="noopener"><img src="w/adclub-4.png" width="435" height="326" data-show="121" data-phone="20vw" alt="A serif art/design/club wordmark"></a><a href="w/ucdlc-5.png" target="_blank" rel="noopener"><img src="w/ucdlc-5.png" width="1400" height="797" data-show="159" data-phone="26vw" alt="The UCLCD wordmark, with the L sitting above a smile"></a></div><div class="row" style="--cols:1.872fr 3.248fr 0.866fr;--g:5.986;--b:20px"><a href="w/ucdlc-6.png" target="_blank" rel="noopener"><img src="w/ucdlc-6.png" width="1400" height="748" data-show="169" data-phone="29vw" alt="The UCLCD wordmark drawn as a face"></a><a href="w/ucdlc-7.png" target="_blank" rel="noopener"><img src="w/ucdlc-7.png" width="1400" height="431" data-show="294" data-phone="50vw" alt="Three versions of the CLCD face"></a><a href="w/ucdlc-1.png" target="_blank" rel="noopener"><img src="w/ucdlc-1.png" width="693" height="800" data-show="78" data-phone="13vw" alt="The CLCD face with the lab name running up its side"></a></div></div>
     </div>
   </div>
 
@@ -671,10 +654,19 @@ function tick() {
   if (ticking) requestAnimationFrame(tick);
 }
 function wake() { if (!ticking) { ticking = true; requestAnimationFrame(tick); } }
-wake();
-box.classList.add('ready');
+// draw the first frame now, and only then fade it in, so nothing shows half-made
+ticking = true;
+tick();
+requestAnimationFrame(() => box.classList.add('ready'));
 </script>
 <script>
+// if the 3D never arrives, the flat screenshot stands in for it
+addEventListener('load', function () {
+  setTimeout(function () {
+    var mac = document.querySelector('.mac3d');
+    if (mac && !mac.classList.contains('ready')) mac.classList.add('failed');
+  }, 15000);
+});
 addEventListener('load', function () {
   var left = Array.from(document.images);
   (function next() { var i = left.shift(); if (i) i.decode().catch(function () {}).then(next); })();
