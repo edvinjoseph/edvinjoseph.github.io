@@ -105,17 +105,18 @@ html, body { overflow-x: clip; }
 /* writing: Letterboxd's slate, each review in one of its three dot colours */
 .lb { background: #14181c; color: #ddeeff; margin-top: 72px; padding-block: 28px 20px; }
 .lb > h2 { margin: 0 0 20px; color: #ffffff; }
+#writing { margin-top: 0; padding-top: 0; }
+#writing > h2 { margin: 0 calc(50% - 50vw); padding: 28px calc(50vw - 50%) 2px; background: #d98a3d; color: #14181c; }   /* the title sits in the first review's band, so Writing has no band of its own */
 .lb > p.m { color: #99aabb; margin: 0 0 20px; }
 .lb > p.m a { color: #ffffff; }
 .lb .review { border: 0; margin-top: 0; padding-block: 18px; background: var(--lc); }
 .lb:has(.review) { padding-bottom: 0; }
 .lb .review { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 0 18px; align-items: start; }
 .lb .poster { display: block; width: 76px; height: 114px; object-fit: cover; }
-.lb.end { margin-top: 0; padding-block: 56px 40px; }
+.lb.end { margin-top: 0; padding-block: 56px 40px; background: #000000; }
 .lb.end a { color: #ffffff; }
 .lb.end .seal { margin-top: 0; }
-.lb.end footer { color: #99aabb; }
-.lb.end footer .credit { font-size: .8em; }
+.lb.end footer { color: #99aabb; white-space: nowrap; font-size: min(13px, calc((100vw - 44px) / 39)); }   /* one line at every width */
 .lb.end footer .credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .lb .review:nth-of-type(3n+1) { --lc: #d98a3d; }
 .lb .review:nth-of-type(3n+2) { --lc: #55b07a; }
@@ -508,7 +509,7 @@ html, body { overflow-x: clip; }
 
   <section class="lb end">
   <img class="seal" src="w/opt/flame-63.webp" srcset="w/opt/flame-63.webp 1x, w/opt/flame-126.webp 2x" width="156" height="271" alt="A flame emblem">
-  <footer class="m">© 2026 Edvin Joseph<br><span class="credit">3D Mac: <a href="https://sketchfab.com/3d-models/macintosh-classic-1991-3b66e98d137d4a23aaa725ce0a8aec28" target="_blank" rel="noopener">Macintosh Classic (1991)</a> by <a href="https://sketchfab.com/doneil" target="_blank" rel="noopener">Daniel O'Neil</a>, <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</span></footer>
+  <footer class="m">© 2026 Edvin Joseph · <span class="credit">3D Mac: <a href="https://sketchfab.com/3d-models/macintosh-classic-1991-3b66e98d137d4a23aaa725ce0a8aec28" target="_blank" rel="noopener">Macintosh Classic (1991)</a> by <a href="https://sketchfab.com/doneil" target="_blank" rel="noopener">Daniel O'Neil</a>, <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</span></footer>
   </section>
 </main>
 
