@@ -268,11 +268,11 @@ html, body { overflow-x: clip; }
   .hci .pile .sticker { left: calc(var(--mu) * 100%); top: calc(var(--mv) * 100%); width: calc(var(--stick) * var(--mz)); transform: translate(-50%, -50%) rotate(var(--mr)); }
 }
 
-/* myUPES: the dashboard scrolling on a MacBook, in a painted study room that is out of focus behind it, with its nav pinned to the top like the real page */
-.item.p.lap { --c: #eadfce; --on: #33251a; background: #eadfce url(w/myupes/room.webp) 50% 30% / cover no-repeat; --lw: min(80vw, 1160px); --wood: clamp(44px, 5.4vw, 80px); position: relative; display: block; padding: 28px calc(50vw - 50%) var(--wood); }
+/* myUPES: the dashboard scrolling on a MacBook, on a solid colour with a darker table, with its nav pinned to the top like the real page */
+.item.p.lap { --c: #eadfce; --on: #33251a; background: #eadfce; --lw: min(80vw, 1160px); --wood: clamp(44px, 5.4vw, 80px); position: relative; display: block; padding: 28px calc(50vw - 50%) var(--wood); }
 .lap .brand { margin: 0 0 12px; }
 .lap .brand img { display: block; width: auto; max-width: none; height: 48px; }
-.item.p.lap::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--wood); background: url(w/myupes/oak.webp) 0 0 / auto 100% repeat-x; box-shadow: inset 0 1px 0 rgba(255,244,222,.6); }   /* the table's front edge, seen straight on, down to the bottom of the section */
+.item.p.lap::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--wood); background: #c8b69d; }   /* the table, a darker shade of the background */
 .item.p.lap > p { max-width: 62ch; }
 .lap .laptop { position: relative; z-index: 1; width: var(--lw); aspect-ratio: 2110 / 1248; margin: 32px 0 0 50%; transform: translateX(-50%); }
 .lap .laptop::after { content: ""; position: absolute; left: 5%; right: 5%; bottom: -4px; height: 8px; z-index: 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.5), rgba(0,0,0,0)); }   /* where the base meets the table */
@@ -285,9 +285,8 @@ html, body { overflow-x: clip; }
 .lap .pin { position: sticky; top: 0; z-index: 1; display: flow-root; height: 0; pointer-events: none; }
 .lap .pin img { display: block; width: 41.806%; max-width: none; height: auto; margin: 0.347% 0 0 29.097%; }
 @media (max-width: 860px) {
-  .item.p.lap { --lw: calc(100vw - 2 * var(--edge)); }
+  .item.p.lap { --lw: calc(100vw - 16px); }
   .lap .laptop { margin-top: 20px; }
-  .lap .sheet { width: 560px; }   /* the page stays readable, and people pan around it */
 }
 
 /* Misc: justified rows, where every picture in a row is the same height and every row ends on the same edge */
