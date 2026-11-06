@@ -274,7 +274,7 @@ html, body { overflow-x: clip; }
 .lap .brand img { display: block; width: auto; max-width: none; height: 48px; }
 .item.p.lap::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--wood); background: #c8b69d; }   /* the table, a darker shade of the background */
 .item.p.lap > p { max-width: 62ch; }
-.lap .laptop { position: relative; z-index: 1; width: var(--lw); aspect-ratio: 2110 / 1248; margin: 32px 0 0 50%; transform: translateX(-50%); }
+.lap .laptop { display: block; cursor: pointer; text-decoration: none; position: relative; z-index: 1; width: var(--lw); aspect-ratio: 2110 / 1248; margin: 32px 0 0 50%; transform: translateX(-50%); }
 .lap .laptop::after { content: ""; position: absolute; left: 5%; right: 5%; bottom: -4px; height: 8px; z-index: 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.5), rgba(0,0,0,0)); }   /* where the base meets the table */
 .lap .mac { position: absolute; inset: 0; z-index: 2; display: block; width: 100%; max-width: none; height: 100%; pointer-events: none; }
 .lap .display { position: absolute; z-index: 1; left: calc(9.431% - 1px); top: calc(3.285% - 1px); width: calc(82.133% + 2px); height: calc(86.779% + 2px); overflow: hidden; background: #e4e4e4; }
@@ -320,7 +320,6 @@ html, body { overflow-x: clip; }
 .fy .belt.down { animation-name: fy-down; }
 .fy .belt img { display: block; flex: none; width: 100%; max-width: none; height: auto; margin-bottom: 16px; border-radius: 12px; }
 .fy .belt .only-phone { display: none; }
-.fy .wall:hover .belt { animation-play-state: paused; }
 @keyframes fy-up { to { transform: translateY(-25%); } }
 @keyframes fy-down { from { transform: translateY(-25%); } to { transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) { .fy .belt { animation: none; } }
@@ -366,6 +365,13 @@ html, body { overflow-x: clip; }
 .opening { margin-inline: calc(50% - 50vw); padding: 64px calc(50vw - 50%) 24px; background: #000; color: #e9e9e6; --ink: #e9e9e6; --mute: #99aabb; --rule: #2c3440; }
 .gate { display: block; width: 186px; max-width: 100%; height: auto; margin-bottom: 28px; }
 .opening > h2:last-child { margin-bottom: 0; }
+/* Let's talk type: the piece's own opening, as a link to it */
+.item.p.type { --c: #111111; --on: #ffffff; display: block; padding: 28px calc(50vw - 50%) 40px; }
+.item.p.type > p { max-width: 62ch; }
+.type .poster { display: block; width: fit-content; margin-top: 20px; color: #fff; font-weight: 700; font-size: clamp(64px, 12vw, 136px); line-height: .98; letter-spacing: -.04em; text-decoration: none; transition: opacity .2s; }
+.type .poster span { display: block; }
+.type .poster .it { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 400; }
+.type .poster:hover { opacity: .75; }
 </style>
 <noscript><style>.mac3d .mac-flat { opacity: 1; pointer-events: auto; }</style></noscript>
 
@@ -487,9 +493,9 @@ html, body { overflow-x: clip; }
   <div class="item p lap">
     <h3 class="brand"><img src="w/myupes/logo.png" width="373" height="114" data-show="157" data-phone="157px" alt="myUPES"></h3>
     <p>A redesign of the student portal at UPES, my university. It puts what students check every day on one dashboard.</p>
-    <div class="laptop">
+    <a class="laptop" href="https://myupes.framer.website/" target="_blank" rel="noopener" aria-label="Open the myUPES site">
       <div class="display">
-        <div class="scroller" tabindex="0" aria-label="The myUPES dashboard">
+        <div class="scroller">
           <div class="sheet">
             <div class="pin"><img src="w/myupes/nav.png" width="1204" height="290" data-show="400" data-phone="234px" alt=""></div>
             <img class="shot" src="w/myupes/page.jpg" width="2880" height="3152" data-show="955" data-phone="560px" alt="The myUPES dashboard, one page of rounded cards">
@@ -497,7 +503,7 @@ html, body { overflow-x: clip; }
         </div>
       </div>
       <img class="mac" src="w/myupes/mac.png" data-show="1160" data-phone="92vw" width="2110" height="1248" alt="">
-    </div>
+    </a>
   </div>
 
   <div class="item p c3 fy">
@@ -515,6 +521,12 @@ html, body { overflow-x: clip; }
     <h3>Poker</h3>
     <p>A concept for a dating app that deals you profiles like playing cards.</p>
     <div class="strip" data-imgs="poker-1.jpg poker-2.jpg poker-3.jpg" data-frame="phone" data-alt="Poker dating app screen"></div>
+  </div>
+
+  <div class="item p type">
+    <h3>Let's talk type</h3>
+    <p>A typography piece I built in Framer, on typeface vs font, classifications and the anatomy of type.</p>
+    <a class="poster" href="https://edvincolours.framer.website/typography" target="_blank" rel="noopener" aria-label="Open Let's talk type"><span>let's</span><span class="it">talk</span><span>type</span></a>
   </div>
 
   <div class="item p c6 gal misc">
