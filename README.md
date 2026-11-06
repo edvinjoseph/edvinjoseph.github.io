@@ -1,6 +1,6 @@
 # Edvin Joseph
 
-Portfolio site, served by GitHub Pages at https://niap3.github.io/.
+Portfolio site, served by GitHub Pages at https://edvinjoseph.github.io/.
 
 `src.html` is the source. `build.py` writes `index.html` from it:
 

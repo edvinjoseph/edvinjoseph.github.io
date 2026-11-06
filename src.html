@@ -366,12 +366,10 @@ html, body { overflow-x: clip; }
 .gate { display: block; width: 186px; max-width: 100%; height: auto; margin-bottom: 28px; }
 .opening > h2:last-child { margin-bottom: 0; }
 /* Let's talk type: the piece's own opening, as a link to it */
-.item.p.type { --c: #111111; --on: #ffffff; display: block; padding: 28px calc(50vw - 50%) 40px; }
+.item.p.type { --c: #111111; --on: #ffffff; }
 .item.p.type > p { max-width: 62ch; }
-.type .poster { display: block; width: fit-content; margin-top: 20px; color: #fff; font-weight: 700; font-size: clamp(64px, 12vw, 136px); line-height: .98; letter-spacing: -.04em; text-decoration: none; transition: opacity .2s; }
-.type .poster span { display: block; }
-.type .poster .it { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 400; }
-.type .poster:hover { opacity: .75; }
+.item.p.type.wide > .strip a { max-width: none; flex: none; }
+.item.p.type.wide > .strip img { display: block; width: auto; height: clamp(220px, 34vw, 400px); max-width: none; border-radius: 12px; box-shadow: 0 0 0 1px #333; }
 </style>
 <noscript><style>.mac3d .mac-flat { opacity: 1; pointer-events: auto; }</style></noscript>
 
@@ -523,10 +521,10 @@ html, body { overflow-x: clip; }
     <div class="strip" data-imgs="poker-1.jpg poker-2.jpg poker-3.jpg" data-frame="phone" data-alt="Poker dating app screen"></div>
   </div>
 
-  <div class="item p type">
+  <div class="item p type wide">
     <h3>Let's talk type</h3>
     <p>A typography piece I built in Framer, on typeface vs font, classifications and the anatomy of type.</p>
-    <a class="poster" href="https://edvincolours.framer.website/typography" target="_blank" rel="noopener" aria-label="Open Let's talk type"><span>let's</span><span class="it">talk</span><span>type</span></a>
+    <div class="strip"><a href="https://edvincolours.framer.website/typography" target="_blank" rel="noopener"><img src="w/type/open.jpg" width="790" height="540" alt="The opening: let's talk type" loading="lazy"></a><a href="https://edvincolours.framer.website/typography" target="_blank" rel="noopener"><img src="w/type/burst.jpg" width="375" height="490" alt="A red starburst from the serifs and sans-serifs section" loading="lazy"></a><a href="https://edvincolours.framer.website/typography" target="_blank" rel="noopener"><img src="w/type/class.jpg" width="790" height="330" alt="Serif classes shown across the word Calligraphy" loading="lazy"></a><a href="https://edvincolours.framer.website/typography" target="_blank" rel="noopener"><img src="w/type/anatomy.jpg" width="790" height="410" alt="The anatomy of type, with each part labelled" loading="lazy"></a></div>
   </div>
 
   <div class="item p c6 gal misc">
