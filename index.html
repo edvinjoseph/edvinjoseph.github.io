@@ -27,6 +27,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--text); -webkit-font-smoothing: antialiased; }
 main {
+  --computer-overlap: clamp(80px, 10vw, 160px);
   max-width: 680px; margin: 0 auto;
   padding-left: max(20px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px));
@@ -330,7 +331,7 @@ html, body { overflow-x: clip; }
   .fy .belt .only-phone { display: block; }
 }
 
-/* Centre project text beside the media. The AR video crosses the colour bands;
+/* Centre project text beside the media. The video and computer cross the colour bands;
    space in the neighbouring projects keeps their text clear of it. */
 .projects { --video-overlap: 64px; }
 .list li.p.side.over { grid-template-rows: 1fr auto auto 1fr; }
@@ -341,7 +342,9 @@ html, body { overflow-x: clip; }
 .projects > li.p.side.ar > .strip { margin-block: calc(-1 * var(--video-overlap)); z-index: 2; }
 .projects > li.p:has(+ li.ar) { padding-bottom: calc(20px + var(--video-overlap)); }
 .projects > li.ar + li.p { padding-top: calc(20px + var(--video-overlap)); }
-.list li.p.side.over.flip > .mac3d { margin: 0 0 0 var(--edge); }
+.list li.p.side.over.flip > .mac3d { margin: calc(-1 * var(--computer-overlap)) 0 calc(-1 * var(--computer-overlap)) var(--edge); z-index: 2; }
+.lead.p:has(+ .projects > li:first-child .mac3d) { padding-bottom: calc(8px + var(--computer-overlap)); }
+.projects > li:has(.mac3d) + li.p { padding-top: calc(20px + var(--computer-overlap)); }
 .list li.side.over video { width: min(100%, 228px); height: auto; border-radius: 30px; corner-shape: squircle; box-shadow: 0 18px 40px -14px rgba(0,0,0,.6); }
 @media (max-width: 860px) {
   .list li.p.side.over { grid-template-rows: none; }
@@ -349,7 +352,8 @@ html, body { overflow-x: clip; }
   .list li.p.side.over > .strip { margin: 14px 0 0; }
   .projects > li.p.side.ar > .strip { margin-block: 14px calc(-1 * var(--video-overlap)); }
   .projects > li.p:has(+ li.ar) { padding-bottom: 20px; }
-  .list li.p.side.over.flip > .mac3d { margin: 14px 24px 0 0; width: min(calc(100% - 24px), 720px); }
+  .list li.p.side.over.flip > .mac3d { margin: 14px 24px calc(-1 * var(--computer-overlap)) 0; width: min(calc(100% - 24px), 720px); }
+  .lead.p:has(+ .projects > li:first-child .mac3d) { padding-bottom: 8px; }
 }
 /* Poker: its logo sits top centre, so the camera moves to the side */
 .item.p.wide.punch .phone .screen::after { top: 14px; left: 14px; width: 15px; height: 15px; border-radius: 50%; transform: none; background: #000; }
