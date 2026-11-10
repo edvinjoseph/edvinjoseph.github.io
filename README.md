@@ -10,6 +10,8 @@ python build.py
 
 It needs Python with Pillow. Images live in `w/`. The build also writes right-sized WebP copies to `w/opt/` and points the page at them; the originals stay for the links that open them. Copies are only remade when a source changes, so the first build is slow and later ones are quick. Pushing to `main` deploys the site through `.github/workflows/pages.yml`.
 
+Vintage Windows Machine's install count comes from the public VS Code Marketplace API when the page opens and refreshes every five minutes while the page is visible. If the request fails, it keeps the last displayed count. The number inside `[data-marketplace-installs]` in `src.html` is the fallback for offline visits or disabled JavaScript.
+
 ## Changing the film reviews
 
 The Writing section comes from `reviews.json`. Each entry names a film by its Letterboxd address, the part after `letterboxd.com/film/`:

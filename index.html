@@ -413,7 +413,7 @@ html, body { overflow-x: clip; }
       </ul>
   </section>
   <ul class="list">
-    <li class="p c2 side flip over"><h3><a href="https://marketplace.visualstudio.com/items?itemName=theedvinjoseph.vintage-windows-machine-theme" target="_blank" rel="noopener">Vintage Windows Machine</a></h3><p>A retro Windows-style theme for VS Code. 3,514 installs on the Marketplace.</p><div class="mac3d" data-model="w/mac-classic-glb.json" data-skin="w/mac-classic.jpg" data-screen="w/vwm-1.jpg"><a class="mac-flat" href="w/vwm-1.jpg" target="_blank" rel="noopener"><img src="w/vwm-1.jpg" width="1800" height="1131" alt="VS Code in the Vintage Windows Machine theme"></a></div></li>
+    <li class="p c2 side flip over"><h3><a href="https://marketplace.visualstudio.com/items?itemName=theedvinjoseph.vintage-windows-machine-theme" target="_blank" rel="noopener">Vintage Windows Machine</a></h3><p>A retro Windows-style theme for VS Code. <span data-marketplace-installs>3,559</span> installs on the Marketplace.</p><div class="mac3d" data-model="w/mac-classic-glb.json" data-skin="w/mac-classic.jpg" data-screen="w/vwm-1.jpg"><a class="mac-flat" href="w/vwm-1.jpg" target="_blank" rel="noopener"><img src="w/vwm-1.jpg" width="1800" height="1131" alt="VS Code in the Vintage Windows Machine theme"></a></div></li>
     <li class="p c3"><h3>Sabit</h3><p>The only developer on Sabit, a Qur'an reading app that turns daily reading into a game. I'm part of almost every product discussion, and many of the app's core features started as my suggestions.</p><p>Flagged that the app we were drawing from probably had a timer you could cheat by changing the phone's clock, a tradeoff I'd seen at Brightpoint. It did. That decided how we built ours.</p><p>Built the app end to end: reading timers, rewards, a courtyard you decorate, levels, the backend and database, server-side content, localisation and Firebase Analytics.</p></li>
     <li class="p c4"><h3>Blinkit Unlock</h3><p>People on Blinkit buy the same few things and hardly ever try another category. I tagged 6,072 reviews against a 30-label taxonomy and built a BM25 search tool to dig through them. Mostly it came down to habit. People don't buy what they don't usually buy. I prototyped an unlock that puts a nearby category in front of them between cart and delivery.</p></li>
     <li class="p c1"><h3>Discovery Copilot</h3><p>Spotify users say their recommendations go stale. I built Signal, an AI tool to sort through their reviews, and underneath most of it was one complaint. They can't steer the algorithm. So I made an MVP that lets them.</p></li>
@@ -696,6 +696,34 @@ tick();
 requestAnimationFrame(() => box.classList.add('ready'));
 </script>
 <script>
+// Marketplace totals refresh on arrival and every five minutes while the page is visible.
+(function () {
+  var count = document.querySelector('[data-marketplace-installs]');
+  if (!count) return;
+  async function update() {
+    var controller = new AbortController();
+    var timeout = setTimeout(function () { controller.abort(); }, 8000);
+    try {
+      var response = await fetch('https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json;api-version=7.2-preview.1', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filters: [{ criteria: [{ filterType: 7, value: 'theedvinjoseph.vintage-windows-machine-theme' }] }], flags: 256 }),
+        signal: controller.signal
+      });
+      if (!response.ok) return;
+      var data = await response.json();
+      var installs = data.results?.[0]?.extensions?.[0]?.statistics?.find(function (s) { return s.statisticName === 'install'; });
+      if (Number.isSafeInteger(installs?.value) && installs.value >= 0) count.textContent = installs.value.toLocaleString('en-US');
+    } catch (_) {
+      // Keep the last count if the Marketplace is unavailable or the visitor is offline.
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+  update();
+  setInterval(function () { if (!document.hidden) update(); }, 5 * 60 * 1000);
+})();
+
 // if the 3D never arrives, the flat screenshot stands in for it
 addEventListener('load', function () {
   setTimeout(function () {
