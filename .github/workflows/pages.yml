@@ -25,7 +25,7 @@ jobs:
       - name: Collect the site
         run: |
           mkdir _site
-          cp index.html .nojekyll _site/
+          cp index.html .nojekyll Edvin_Joseph_PM_Resume.pdf _site/
           cp -r w _site/w
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
