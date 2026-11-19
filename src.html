@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" href="w/favicon-180.png">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Edvin Joseph: product, design and games.">
-<!-- the 3D Mac gates the page, so its files start downloading before anything else -->
+<!-- the 3D Mac's files start downloading before anything else, so it's ready sooner -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/+esm">
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js/+esm">
@@ -380,25 +380,9 @@ html, body { overflow-x: clip; }
 .opening { margin-inline: calc(50% - 50vw); padding: 64px calc(50vw - 50%) 24px; background: #000; color: #e9e9e6; --ink: #e9e9e6; --mute: #99aabb; --rule: #2c3440; }
 .gate { display: block; width: 186px; max-width: 100%; height: auto; margin-bottom: 28px; }
 .opening > h2:last-child { margin-bottom: 0; }
-/* loading screen: black like the opening, lifted once the 3D Mac has drawn its first frame */
-.loader { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; background: #000; transition: opacity .6s, visibility 0s .6s; }
-.loader::after { content: ""; width: 28px; height: 28px; border-radius: 50%; border: 2px solid #2c3440; border-top-color: #99aabb; animation: spin .8s linear infinite; }
-@keyframes spin { to { transform: rotate(1turn); } }
-html:not(.loaded) body { overflow: hidden; }
-html.loaded .loader { opacity: 0; visibility: hidden; }
-@media (prefers-reduced-motion: reduce) { .loader::after { animation-duration: 2.4s; } }
 </style>
-<noscript><style>.mac3d .mac-flat { opacity: 1; pointer-events: auto; } .loader { display: none; } html:not(.loaded) body { overflow: visible; }</style></noscript>
+<noscript><style>.mac3d .mac-flat { opacity: 1; pointer-events: auto; }</style></noscript>
 
-<div class="loader" role="status" aria-label="Loading"></div>
-<script>
-// never hold the page longer than this, even if the 3D library can't be reached
-setTimeout(function () {
-  document.documentElement.classList.add('loaded');
-  var mac = document.querySelector('.mac3d');
-  if (mac && !mac.classList.contains('ready')) mac.classList.add('failed');
-}, 12000);
-</script>
 <main>
   <div class="opening">
   <header>
@@ -571,7 +555,7 @@ setTimeout(function () {
 <script type="module">
 const box = document.querySelector('.mac3d');
 
-// the page waits behind the loading screen for the Mac, so the 3D library and the model load straight away
+// the 3D library and the model load straight away, so the Mac is ready as soon as possible
 const [THREE, { GLTFLoader }, { RoomEnvironment }] = await Promise.all([
   import('https://cdn.jsdelivr.net/npm/three@0.160.0/+esm'),
   import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js/+esm'),
@@ -716,7 +700,7 @@ function wake() { if (!ticking) { ticking = true; requestAnimationFrame(tick); }
 // draw the first frame now, and only then fade it in, so nothing shows half-made
 ticking = true;
 tick();
-requestAnimationFrame(() => { box.classList.add('ready'); document.documentElement.classList.add('loaded'); });
+requestAnimationFrame(() => box.classList.add('ready'));
 </script>
 <script>
 // Marketplace totals refresh on arrival and every five minutes while the page is visible.
